@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-25T05:45:51Z",
+  "checked_at": "2026-11-25T05:49:30Z",
   "networks": {
     "852": {
       "asn": 852,
-      "checked_at": "2026-11-25T05:45:51Z",
+      "checked_at": "2026-11-25T05:49:30Z",
       "ripe": {
         "status": "ok",
         "data": {
@@ -4544,7 +4544,7 @@
     },
     "577": {
       "asn": 577,
-      "checked_at": "2026-11-25T05:45:51Z",
+      "checked_at": "2026-11-25T05:49:30Z",
       "ripe": {
         "status": "ok",
         "data": {
@@ -7113,7 +7113,7 @@
     },
     "812": {
       "asn": 812,
-      "checked_at": "2026-11-25T05:45:51Z",
+      "checked_at": "2026-11-25T05:49:30Z",
       "ripe": {
         "status": "ok",
         "data": {
@@ -8920,7 +8920,7 @@
     },
     "6327": {
       "asn": 6327,
-      "checked_at": "2026-11-25T05:45:51Z",
+      "checked_at": "2026-11-25T05:49:30Z",
       "ripe": {
         "status": "ok",
         "data": {
