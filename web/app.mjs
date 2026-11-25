@@ -1,37 +1,35 @@
-import { cleanLines } from './model.mjs';
-const input = document.querySelector('#input');
-const output = document.querySelector('#output');
-const status = document.querySelector('#status');
-const copy = document.querySelector('#copy');
-function update() {
-  const result = cleanLines(input.value);
-  output.value = result.text;
-  status.textContent = `${result.count} unique ${result.count === 1 ? 'line' : 'lines'}; ${result.removed} ${result.removed === 1 ? 'duplicate' : 'duplicates'} removed.`;
-  copy.disabled = result.count === 0;
+import {asn,bgp,directory,fromCapture,compare,pair,readPair,evidenceCsv} from './model.mjs';
+const $=id=>document.getElementById(id),KEY='coolcode:backbonecompare:pairs';
+const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
+let baseline,config={},current=[],cache=new Map(),kind='bgp',pageIndex=0,busy=false;
+const status=text=>$('status').textContent=text;
+const formatDate=value=>value?new Date(value).toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'}):'Not supplied';
+const savedLimit=()=>Math.max(1,Math.min(50,Number(config.max_saved_pairs)||20));
+function download(name,text,type){const url=URL.createObjectURL(new Blob([text],{type}));const a=node('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+function link(text,url){const a=node('a',text);a.href=url;a.target='_blank';a.rel='noopener';return a;}
+function networkCards(){ $('network-cards').replaceChildren();for(const [i,net] of current.entries()){const card=node('article',undefined,'network-card');const heading=node('h3');heading.append(node('span',i===0?'A':'B',`side ${i===0?'a':'b'}`),document.createTextNode(`AS${net.asn}`));card.append(heading,node('p',net.directory?.name||'Network name not listed in captured directory','name'));
+  for(const [key,title] of [['bgp','RIPE RIS'],['directory','PeeringDB']]){const source=net[key],row=node('p',undefined,'source-row');row.append(node('strong',title+' · '));if(source?.ok){row.append(document.createTextNode('checked '+formatDate(source.checked_at)));if(key==='bgp')row.append(node('br'),document.createTextNode('Observed '+formatDate(source.observed_at)));else if(!source.listed)row.append(node('br'),document.createTextNode('No directory record returned'));else row.append(node('br'),document.createTextNode('Network listing updated '+formatDate(source.updated_at)));}else row.append(document.createTextNode('Unavailable'));card.append(row);if(source?.error)card.append(node('p',source.ok?'Refresh failed; previous evidence retained. '+source.error:source.error,'error-note'));}
+  const sourceLinks=node('p',undefined,'source-row');sourceLinks.append(link('RIPEstat ↗',`https://stat.ripe.net/AS${net.asn}`));if(net.directory?.net_id)sourceLinks.append(document.createTextNode(' · '),link('PeeringDB ↗',`https://www.peeringdb.com/net/${net.directory.net_id}`));card.append(sourceLinks);$('network-cards').append(card);}}
+function render(){if(current.length!==2)return;networkCards();const result=compare(...current,$('family').value,$('uncertain').checked);$('summary').replaceChildren();for(const [key,title] of [['bgp','Shared BGP neighbours'],['exchanges','Shared listed exchanges'],['facilities','Shared listed facilities']]){const r=result[key],box=node('div',undefined,'summary-card');box.append(node('strong',r.available?String(r.shared.length):'—'),node('h3',title),node('p',r.available?`${r.countA} in A · ${r.countB} in B`:'Both sources needed'));$('summary').append(box);}
+  for(const button of document.querySelectorAll('[data-kind]')){button.setAttribute('aria-selected',String(button.dataset.kind===kind));button.tabIndex=button.dataset.kind===kind?0:-1;}$('evidence-panel').setAttribute('aria-labelledby','tab-'+kind);$('uncertain-label').hidden=kind!=='bgp';
+  const notes={bgp:'Left / right are AS-path positions, not commercial relationships. Uncertain collector-adjacent observations are excluded unless selected.',exchanges:'Distinct exchange IDs. IPv4 / IPv6 badges indicate listed addresses, not a connectivity test. Multiple LAN memberships are combined.',facilities:'Distinct facility IDs and directory-supplied locations. The address-family filter does not affect facilities.'};$('evidence-note').textContent=notes[kind];
+  const source=result[kind],relationship=$('relationship').value,term=$('filter').value.trim().toLowerCase();const rows=source[relationship].filter(row=>[row.id,row.a?.name,row.b?.name,row.a?.city,row.b?.city].filter(Boolean).join(' ').toLowerCase().includes(term)).sort((a,b)=>typeof a.id==='number'?a.id-b.id:String(a.id).localeCompare(String(b.id)));const pages=Math.max(1,Math.ceil(rows.length/25));pageIndex=Math.max(0,Math.min(pageIndex,pages-1));$('page-info').textContent=`${rows.length} records · page ${pageIndex+1} of ${pages}`;$('previous').disabled=pageIndex===0;$('next').disabled=pageIndex===pages-1;
+  $('evidence-list').replaceChildren();if(!source.available){$('evidence-list').append(node('p','Both source captures are needed to compare this evidence. Refresh the pair to try the unavailable source again.','empty'));return;}if(!rows.length){$('evidence-list').append(node('p',term?'No captured records match this filter.':'No records in this evidence category. This is not proof that no real-world relationship exists.','empty'));return;}
+  const head=node('div',undefined,'evidence-item evidence-head');head.append(node('span',kind==='bgp'?'Neighbour':'Listed location'),node('span',`A · AS${current[0].asn}`),node('span',`B · AS${current[1].asn}`));$('evidence-list').append(head);
+  for(const row of rows.slice(pageIndex*25,(pageIndex+1)*25)){const item=node('div',undefined,'evidence-item'),first=node('div'),record=row.a||row.b;const url=kind==='bgp'?`https://stat.ripe.net/AS${row.id}`:`https://www.peeringdb.com/${kind==='exchanges'?'ix':'fac'}/${row.id}`;first.append(link(record.name||String(row.id),url));if(kind==='facilities')first.append(node('small',[record.city,record.country].filter(Boolean).join(', ')));if(kind!=='bgp')first.append(node('small',`Directory ID ${row.id}`));item.append(first);for(const key of ['a','b']){const side=node('div',undefined,'evidence-side'),r=row[key];if(!r)side.textContent='Not in this capture';else if(kind==='bgp'){side.append(document.createTextNode(r.types.join(' + ')));for(const [flag,label] of [['ipv4','IPv4'],['ipv6','IPv6']])if(r[flag])side.append(node('span',label,'family'));}else{side.append(document.createTextNode('Listed'));if(kind==='exchanges')for(const [flag,label] of [['ipv4','IPv4'],['ipv6','IPv6']])if(r[flag])side.append(node('span',label,'family'));side.append(node('small','Updated '+formatDate(r.updated_at)));}item.append(side);}$('evidence-list').append(item);}
 }
-input.addEventListener('input', update);
-document.querySelector('#sample').addEventListener('click', () => {
-  input.value = '  Halifax\nLangley\nHalifax\n\nVancouver  ';
-  update();
-});
-document.querySelector('#clear').addEventListener('click', () => {
-  input.value = '';
-  update();
-  input.focus();
-});
-if (navigator.clipboard && window.isSecureContext) {
-  copy.hidden = false;
-  copy.disabled = true;
-  copy.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(output.value);
-      status.textContent = 'Result copied.';
-    } catch {
-      output.focus();
-      output.select();
-      status.textContent = 'Copy was unavailable. The result is selected so you can copy it manually.';
-    }
-  });
-}
-// Namespace future preference storage as coolcode:<tool-id>:<key>.
-// Do not persist pasted text or uploads by default.
+async function fetchJson(url){const response=await fetch(url,{signal:AbortSignal.timeout(Math.min(120,Math.max(15,Number(config.request_timeout_seconds)||75))*1000)});if(response.status===429)throw new Error(`Source rate limit; retry after ${response.headers.get('Retry-After')||'a short wait'} seconds.`);if(!response.ok)throw new Error(`Source returned HTTP ${response.status}.`);return response.json();}
+async function lookup(number,force){if(cache.has(number)&&!force)return cache.get(number);const previous=cache.get(number),result={asn:number};const now=new Date().toISOString();const fetched=await Promise.allSettled([fetchJson(`https://stat.ripe.net/data/asn-neighbours/data.json?resource=AS${number}`).then(body=>bgp(body,number,now)),fetchJson(`${config.peering_api_base||'https://www.peeringdb.com/api'}/net?asn=${number}&depth=2`).then(body=>directory(body,number,now))]);for(const [i,key] of ['bgp','directory'].entries()){const response=fetched[i];if(response.status==='fulfilled')result[key]=response.value;else{const message=response.reason?.message||'Source request failed.';result[key]=previous?.[key]?.ok?{...previous[key],error:message}:{ok:false,error:message};}}cache.set(number,result);return result;}
+async function run(force=false){if(busy)return;let numbers;try{numbers=[asn($('asn-a').value),asn($('asn-b').value)];if(numbers[0]===numbers[1])throw new Error('Choose two different ASNs.');}catch(error){status(error.message);return;}busy=true;$('compare').disabled=true;$('refresh').disabled=true;status('Loading each network’s public evidence…');try{const change=current.length&&current.some((n,i)=>n.asn!==numbers[i]);current=await Promise.all(numbers.map(n=>lookup(n,force)));if(change){$('notes').value='';$('pair-label').value='';}pageIndex=0;render();$('workspace').hidden=false;const failures=current.flatMap(n=>[n.bgp,n.directory]).filter(s=>s.error).length;status(failures?`${failures} source request${failures===1?'':'s'} unavailable. Review the dated evidence and source messages below.`:'Comparison ready. Inspect source dates before using it in a decision.');}catch(error){status(error.message);}finally{busy=false;$('compare').disabled=false;$('refresh').disabled=false;}}
+$('compare-form').onsubmit=event=>{event.preventDefault();run();};$('refresh').onclick=()=>run(true);
+for(const id of ['family','relationship','uncertain','filter'])$(id).addEventListener(id==='filter'?'input':'change',()=>{pageIndex=0;render();});
+for(const button of document.querySelectorAll('[data-kind]')){button.onclick=()=>{kind=button.dataset.kind;pageIndex=0;render();};button.onkeydown=event=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){event.preventDefault();const all=[...document.querySelectorAll('[data-kind]')],i=all.indexOf(button),index=event.key==='Home'?0:event.key==='End'?all.length-1:(i+(event.key==='ArrowRight'?1:all.length-1))%all.length;all[index].click();all[index].focus();}};}
+$('previous').onclick=()=>{pageIndex--;render();};$('next').onclick=()=>{pageIndex++;render();};
+function saved(){try{const data=JSON.parse(localStorage.getItem(KEY)||'[]');if(!Array.isArray(data)||data.length>50)throw new Error('Invalid saved collection.');return data.map(readPair);}catch{return [];}}
+function apply(value){const p=readPair(value);current=p.networks;$('asn-a').value=current[0].asn;$('asn-b').value=current[1].asn;$('notes').value=p.notes;$('pair-label').value=p.label;for(const n of current)cache.set(n.asn,n);pageIndex=0;render();$('workspace').hidden=false;status('Loaded the saved source evidence. Original source dates are preserved; refresh explicitly for current data.');}
+function renderSaved(){$('saved-pairs').replaceChildren();for(const [index,p] of saved().entries()){const row=node('div',undefined,'saved-pair'),open=node('button',p.label||`AS${p.networks[0].asn} ↔ AS${p.networks[1].asn}`,'text-button');open.onclick=()=>apply(p);const remove=node('button','Delete','text-button');remove.setAttribute('aria-label',`Delete saved pair ${index+1}`);remove.onclick=()=>{try{const records=saved();records.splice(index,1);localStorage.setItem(KEY,JSON.stringify(records));renderSaved();status('Saved pair deleted.');}catch{status('Browser storage is unavailable.');}};row.append(open,node('small','Saved '+formatDate(p.saved_at)),remove);$('saved-pairs').append(row);}}
+$('save').onclick=()=>{try{const records=saved();if(records.length>=savedLimit())throw new Error(`You have ${savedLimit()} saved pairs. Delete one or export this comparison.`);records.push(pair(current,$('notes').value,$('pair-label').value));localStorage.setItem(KEY,JSON.stringify(records));renderSaved();status('Pair and dated evidence saved in this browser.');}catch(error){status(error.message||'Browser storage is full. Export the evidence instead.');}};
+$('export').onclick=()=>download('backbonecompare-pair.json',JSON.stringify(pair(current,$('notes').value,$('pair-label').value),null,2),'application/json');
+$('csv').onclick=()=>download(`backbonecompare-${$('family').value}-evidence.csv`,evidenceCsv(current,$('family').value,$('uncertain').checked),'text/csv');
+$('import').onchange=async()=>{try{const file=$('import').files[0];if(!file)return;if(file.size>8000000)throw new Error('Pair file must be smaller than 8 MB.');apply(JSON.parse(await file.text()));}catch(error){status(error.message);}finally{$('import').value='';}};
+try{const response=await fetch('./data/networks.json');if(!response.ok)throw new Error('The published capture is unavailable. Reload to try again.');baseline=await response.json();if(baseline.schema!==1||!baseline.networks||!baseline.config)throw new Error('Published capture format is invalid.');config=baseline.config;for(const raw of Object.values(baseline.networks)){const net=fromCapture(raw);cache.set(net.asn,net);const option=node('option',net.directory.name);option.value=String(net.asn);$('networks').append(option);}$('asn-a').value=asn(config.default_pair[0]);$('asn-b').value=asn(config.default_pair[1]);$('baseline-date').textContent=`Published baseline checked ${formatDate(baseline.checked_at)}; ${cache.size} starter networks. New ASNs can be looked up without changing the baseline.`;renderSaved();await run();}catch(error){status(error.message);}

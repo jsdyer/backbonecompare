@@ -1,21 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { cleanLines } from '../web/model.mjs';
-test('trims, removes blanks and preserves first-seen order', () => {
-  assert.deepEqual(cleanLines('  Halifax\nLangley\nHalifax\n\nVancouver  '), {
-    text: 'Halifax\nLangley\nVancouver', count: 3, removed: 1,
-  });
-});
-test('supports Windows and old Mac line endings', () => {
-  assert.equal(cleanLines('a\r\nb\ra').text, 'a\nb');
-});
-test('empty text and whitespace produce an empty result', () => {
-  assert.deepEqual(cleanLines(' \n\t'), { text: '', count: 0, removed: 0 });
-});
-test('preserves case and Unicode', () => {
-  assert.equal(cleanLines('Québec\nquébec\n東京\nQuébec').text, 'Québec\nquébec\n東京');
-});
-test('treats markup as ordinary text', () => {
-  assert.equal(cleanLines('<script>alert(1)</script>\n<script>alert(1)</script>').text, '<script>alert(1)</script>');
-});
-test('rejects non-text input', () => { assert.throws(() => cleanLines(null), TypeError); });
+import {readFileSync} from 'node:fs';
+import {asn,bgp,directory,fromCapture,observed,locations,overlap,compare,pair,readPair,evidenceCsv} from '../web/model.mjs';
+const checked='2026-11-25T01:00:00Z';
+const bgpBody=(resource,rows)=>({status:'ok',data:{resource,query_starttime:'2026-11-24T00:00:00',query_endtime:'2026-11-24T00:00:00',neighbours:rows}});
+const neighbour=(asn,type='left',v4=1,v6=0)=>({asn,type,v4_peers:v4,v6_peers:v6});
+const pdb=(number,ix=10)=>({data:[{id:number,asn:number,name:`Network ${number}`,updated:checked,netixlan_set:[{ix_id:ix,ixlan_id:ix,name:'Example IX',ipaddr4:'192.0.2.1',ipaddr6:null,status:'ok',updated:checked},{ix_id:ix,ixlan_id:ix+1,name:'Example IX other LAN',ipaddr4:null,ipaddr6:'2001:db8::1',status:'ok',updated:checked}],netfac_set:[{fac_id:1,name:'Example facility',city:'Ottawa',country:'CA',status:'ok',updated:checked}]}]});
+const network=(number,rows,ix=10)=>({asn:number,bgp:bgp(bgpBody(number,rows),number,checked),directory:directory(pdb(number,ix),number,checked)});
+test('ASN parsing permits arbitrary 32-bit public input and rejects malformed values',()=>{assert.equal(asn(' AS13335 '),13335);assert.equal(asn('4294967294'),4294967294);for(const n of ['0','4294967295','1.2','as','http://x','-1','123x'])assert.throws(()=>asn(n));});
+test('uncertain observations are excluded by default; IPv6 filtering requires evidence',()=>{const net=network(1,[neighbour(10),neighbour(11,'uncertain',1,2),neighbour(12,'right',0,4)]);assert.deepEqual([...observed(net).keys()],[10,12]);assert.deepEqual([...observed(net,'v6').keys()],[12]);assert.deepEqual([...observed(net,'v6',true).keys()],[11,12]);assert.equal(net.bgp.observed_at,'2026-11-24T00:00:00Z');});
+test('shared ASNs match IDs, preserve both path positions and collapse exchange LANs',()=>{const a=network(1,[neighbour(10),neighbour(20,'right')]),b=network(2,[neighbour(10,'right'),neighbour(30)]);const result=compare(a,b);assert.equal(result.bgp.shared.length,1);assert.deepEqual(result.bgp.shared[0].a.types,['left']);assert.deepEqual(result.bgp.shared[0].b.types,['right']);assert.equal(result.exchanges.countA,1);assert.equal(locations(a,'exchanges','v6').get(10).ipv6,true);assert.equal(result.facilities.shared.length,1);});
+test('unavailable source never becomes a zero-overlap claim',()=>{const a=network(1,[neighbour(10)]),b={asn:2,bgp:{ok:false,error:'timeout'},directory:{ok:false,error:'429'}};const result=compare(a,b);assert.equal(result.bgp.available,false);assert.equal(result.bgp.countA,null);assert.equal(result.exchanges.available,false);assert.equal(overlap(new Map(),new Map()).available,true);});
+test('saved pair preserves dates, notes and extra ASNs outside the published defaults',()=>{const a=network(123456,[neighbour(10)]),b=network(654321,[neighbour(10)]),saved=readPair(pair([a,b],'Ask about shared ducts','Backup links'));assert.equal(saved.networks[0].asn,123456);assert.equal(saved.networks[0].bgp.observed_at,a.bgp.observed_at);assert.equal(saved.notes,'Ask about shared ducts');assert.throws(()=>readPair(pair([a,a],'','')));assert.throws(()=>bgp(bgpBody(100,[]),999,checked));});
+test('CSV keeps source dates and protects spreadsheet formulas',()=>{const a=network(1,[neighbour(10)]),b=network(2,[]);a.directory.exchanges[0].name='=cmd|unsafe';a.directory.exchanges[1].name='=cmd|unsafe';const value=evidenceCsv([a,b]);assert.ok(value.includes("'=cmd|unsafe"));assert.ok(value.includes('2026-11-24T00:00:00Z'));assert.ok(value.includes(checked));});
+test('actual full baseline normalizes and has no private contact fields',()=>{const data=JSON.parse(readFileSync(new URL('../web/data/networks.json',import.meta.url)));const config=JSON.parse(readFileSync(new URL('../config/watchlist.json',import.meta.url)));assert.deepEqual(Object.keys(data.networks).map(Number).sort((a,b)=>a-b),[...config.asns].sort((a,b)=>a-b));for(const raw of Object.values(data.networks)){const n=fromCapture(raw);assert.equal(n.asn,raw.asn);assert.ok(n.bgp.neighbours.length>=0);}assert.equal(JSON.stringify(data).includes('poc_set'),false);});

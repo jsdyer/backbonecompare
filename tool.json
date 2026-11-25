@@ -1,16 +1,22 @@
 {
-  "id": "coolcode-tool-template",
-  "title": "CoolCode Tool Starter",
-  "description": "A browser-only example that trims lines and removes exact duplicates.",
-  "category": "security",
-  "tags": ["text", "lines", "duplicates"],
-  "icon": "scan-search",
-  "url": "/coolcode-tool-template/",
-  "source": "https://github.com/jsdyer/coolcode-tool-template",
+  "id": "backbonecompare",
+  "title": "Backbone Compare",
+  "description": "Compare observed BGP neighbours and listed network exchanges and facilities for any two ASNs.",
+  "category": "liminal-tools",
+  "tags": [
+    "networks",
+    "asn",
+    "bgp",
+    "peering",
+    "internet"
+  ],
+  "icon": "network",
+  "url": "/backbonecompare/",
+  "source": "https://github.com/jsdyer/backbonecompare",
   "hosting": "project",
   "access": "browser",
   "data_info": {
-    "mode": "local",
-    "detail": "The browser reads the text you paste and compares its lines."
+    "mode": "mixed",
+    "detail": "RIPE RIS path observations and PeeringDB exchange/facility listings, with dated captures and public ASN lookups."
   }
 }

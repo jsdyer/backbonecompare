@@ -1,179 +1,80 @@
-# CoolCode browser tool template
+# Backbone Compare
 
-A starting point for independent tools at `coolcode.ca/<repo>/`: a working local-text
-example, responsive UI, Python standard-library build, Node tests, PR checks and Pages
-publication. No npm install is needed.
+Compare the public evidence for two networks: observed BGP neighbours, listed Internet exchanges and listed facilities.
 
-## Using the example
+**Use it:** https://coolcode.ca/backbonecompare/ · **Source:** https://github.com/jsdyer/backbonecompare
 
 <!-- coolcode:guide -->
-The first occurrence of each trimmed line keeps its place. Compare the output with the original text before copying the result.
+Enter any two ASNs to compare RIPE RIS neighbours and PeeringDB exchange/facility listings. Filter IPv4 or IPv6 evidence, inspect shared and one-sided records, and see observation dates separately from fetch dates. Save named private pairs with notes, export JSON/CSV, or import earlier evidence. Uncertain RIS observations are excluded by default. Shared directory listings and AS-path adjacency do not prove physical route diversity, direct peering or a contractual transit relationship.
 <!-- /coolcode:guide -->
 
-For a real tool, replace this paragraph with one or two plain-text sentences
-about an example, a limit or how to interpret the results. Keep the source,
-coverage, refresh behaviour and a worked example in this README as appropriate.
-When updating a tool, revise any details its behaviour has changed and keep the
-homepage's shorter data-source sentence in `tool.json` accurate.
-The hub imports the marked note into the catalogue README.
+## Use the evidence
 
-## One-time template setup
+1. Enter AS numbers with or without `AS`. Four published examples are starting points; arbitrary valid 32-bit ASNs can be looked up directly.
+2. Compare shared records, records only in A's capture or records only in B's capture. Search and pagination work over the full evidence set, including large networks.
+3. Choose IPv4 or IPv6. For BGP, this requires positive `v4_peers` / `v6_peers` observation counts. For exchange listings, it requires a listed address. Facilities are independent of this filter.
+4. Save a private comparison name, notes and evidence in this browser, or export it. JSON captures retain each source's observation and check dates. CSV exports the current family and uncertainty filters; it includes both networks' source records so comparisons can be independently checked. Importing or restoring does not silently replace evidence with newer results.
 
-Enable **Settings → General → Template repository** here. This repository does not
-need Pages enabled: its workflow builds/tests but intentionally skips deployment.
-New copies also skip deployment until `scripts/init.py` sets the tool ID to match
-their repository name. This lets you create the repo before configuring Pages.
+## What the results mean
 
-## Start a new tool
+RIPE RIS is an observation point, not a complete map of the Internet. Its `left` / `right` labels describe positions in AS paths, not commercial relationships. Its `uncertain` label identifies observations that may arise from RIS's own peering; the comparison excludes them by default. Multiple observation rows for one ASN collapse into one neighbour with retained path-position labels.
 
-1. Select **Use this template → Create a new repository**, choose owner `jsdyer`,
-   a unique lowercase name such as `my-tool`, and public visibility.
-2. Clone the new repository. Use Python 3.12+ and Node 24+.
-3. Set the identity, using a slug that matches the repository name:
+PeeringDB records are participant-maintained. Multiple LAN memberships collapse by exchange ID. Facilities match by facility ID. Shared memberships do not establish direct peering, active connectivity, common fibres or independent outage domains. Empty records mean no captured evidence. A source error is not treated as zero overlap, and failed refreshes retain prior evidence with an explicit error and original dates.
 
-```sh
-python3 scripts/init.py my-tool --title "My Tool" --description "Describe what this tool does."
-```
+**Useful next step:** ask providers about last-mile routes, common ducts, shared facilities, upstream design and failover testing. This tool supplies questions and dated evidence, not a diversity certification.
 
-Review the category, tags and icon in `tool.json`. `access: "browser"` tells the main
-catalogue that the tool works immediately without installation. `--owner` supports a different
-GitHub owner, but only projects owned by `jsdyer` inherit the CoolCode domain.
+## Sources and privacy
 
-4. Replace the example in `web/` and its tests. Update the privacy explanation,
-   source attribution and README to describe the real tool.
-5. Test and preview:
+- RIPEstat neighbours API: `https://stat.ripe.net/data/asn-neighbours/data.json?resource=AS852`
+- Semantics: https://stat.ripe.net/docs/data-api/api-endpoints/asn-neighbours.html
+- PeeringDB API: `https://www.peeringdb.com/api/net?asn=852&depth=2`
+- API specifications: https://docs.peeringdb.com/api_specs/
+
+`checked_at` records a successful fetch; RIPE's `query_starttime` is displayed separately as “Observed”. PeeringDB's network and membership `updated` dates describe directory edits. A newly checked source can still contain older observations. No source date is replaced with the build date.
+
+Published defaults are fetched from this site. New ASN lookups and explicit refreshes send each ASN separately to RIPEstat and PeeringDB; those services receive normal request metadata including the visitor's IP address. Notes, pair labels and imports remain local. Save is explicit, using `coolcode:backbonecompare:pairs` in localStorage. The standard CoolCode aggregate visit counter also runs. No secret is sent to the visitor's browser.
+
+## Optional key: exact location
+
+In **this repository**, open **Settings → Secrets and variables → Actions → New repository secret**:
+
+| Secret name | Value | Used by |
+| --- | --- | --- |
+| `PEERINGDB_API_KEY` | Your PeeringDB API key | Scheduled baseline collector only |
+
+Direct link: https://github.com/jsdyer/backbonecompare/settings/secrets/actions
+
+The key is optional: public GET requests work without it. It is sent as `Authorization: Api-Key ...` only to PeeringDB's official API host. The Actions workflow reads it only in the trusted main-branch source-refresh step. Never add the key to repository files, `web/`, variables exposed to the browser, generated JSON or this README. Visitor lookups use PeeringDB's public CORS-enabled API and need no login. An invalid key fails visibly; it is not silently ignored.
+
+## Expand or customize
+
+Edit `config/watchlist.json`:
+
+- `asns`: baseline ASN integers (currently 852, 577, 812 and 6327). Add another valid ASN here; no frontend enumeration or hardcoded count must change. The collector validates each returned ASN. A valid ASN may have no observed neighbours or no directory listing.
+- `default_pair`: two distinct ASNs present in the baseline.
+- `max_saved_pairs`: local saved-pair limit (default 20, bounded to 50).
+- `request_timeout_seconds`: source timeout (default 75; browser bounds 15–120).
+- `request_interval_seconds`: collector interval between networks, minimum 3.1 seconds to respect guest rate limits.
+- `peering_api_base`: browser public API base. The collector always uses the fixed official API endpoints and never sends credentials to a configured host.
+
+Run `python3 scripts/refresh.py`, then the checks below. All sources must pass shape, ASN and record validation before the snapshot and its status probe are replaced. A malformed or unavailable source fails the workflow and preserves the last successful deployment. The collector strips contact records, private notes and unrelated metadata; only necessary public evidence is published. The API key is never part of output.
+
+Commit configuration, `web/data/`, code and tests. Push to main or run **Browser tool · Check and publish** manually. PRs use the committed capture offline. Main builds refresh the sources, run all checks, commit captured data and publish GitHub Pages. Pages source must be GitHub Actions. No CNAME belongs in this repository.
+
+## Schedule and watchdog
+
+`.github/workflows/pages.yml` collects daily at **08:53 UTC**, on main pushes and manually. `.github/workflows/schedule-guard.yml` renews only that workflow and itself. Register both with the independent CoolCode watchdog; the guard does not demonstrate data freshness.
+
+Small probe: `https://coolcode.ca/backbonecompare/data/status.json`, fields `checked_at`, `count` and `sha256` of the network JSON. Expected cadence 24 hours; alert after 72 hours, count below 1, failed workflow or bad HTTP response. Also probe `data/networks.json` and verify source observation dates independently of collection freshness.
+
+## Development
 
 ```sh
 node --test tests/*.test.mjs
 python3 -m unittest discover -s tests -v
 python3 scripts/build.py
-python3 -m http.server 8000 --directory dist
-```
-
-Open `http://localhost:8000/`. The example trims lines, skips blanks and removes exact
-duplicates, preserving first-seen order and capitalization. It processes the text in tab memory. Update that explanation if your app behaves differently.
-
-CI also tests the browser flow and mobile layout at a project subpath. Replace the
-sample assertions in `tests/browser_smoke.py` when implementing your own UI. To run
-that check locally (optional for ordinary preview):
-
-```sh
-python3 -m venv .venv
-. .venv/bin/activate
 python3 -m pip install -r tests/browser-requirements.txt
-python3 -m playwright install --with-deps chromium
-python3 tests/browser_smoke.py
+CHROMIUM_PATH=/usr/bin/google-chrome python3 tests/browser_smoke.py
 ```
 
-Playwright is a test-only dependency; the app and its static build do not use it.
-
-## Expand or customize
-
-Every implemented tool should replace this section with its actual configuration
-path and a working example. A small `config.json` can hold default entities,
-query presets, source choices and request limits. Those defaults should be useful
-starting points, while visitors can enter other valid inputs whenever the source
-supports them. Keep provider limits explicit and separate from the starter list.
-
-Derive counts, filters and item validation from the current data. Do not require
-exactly the initial number of items. Add a test that expands the configuration,
-and keep historical captures readable when their coverage differs from today's
-watchlist. Display the selected capture date accurately.
-
-Document which changes need only a normal code push and which also need a data
-refresh. Include the refresh command or exact GitHub workflow and input, followed
-by the publication step. A successful code build need not mean a new collection
-has been fetched. The starter itself has no external collection or refresh.
-
-## Publish and register
-
-When the actual tool is ready, in the **new tool repository** set **Settings → Pages → Build and deployment →
-Source → GitHub Actions**. Push to `main`, or manually run **Browser tool · Check and
-publish** after enabling Pages. If the initial deployment ran before Pages was enabled,
-enable it and rerun. PRs only check/build and provide a downloadable preview artifact.
-
-Keep `{{VISIT_COUNTER}}` in the page head and `{{ISSUE_LINK}}` in the footer when replacing the starter UI. The build enables these for initialized CoolCode repositories. The shared counter records aggregate opens on coolcode.ca by public tool ID. Toolbox inputs and URL parameters are excluded. The issue link opens a reporting form with the tool already selected.
-
-Keep app-owned asset paths and module imports relative. Check `https://coolcode.ca/my-tool/`.
-Do not add a CNAME or set `coolcode.ca` as this project's custom domain; the account
-site supplies it. Only successful `main` builds deploy.
-
-After verifying the app, copy the reviewed object from `tool.json` into `data/tools.json`
-in [the main site](https://github.com/jsdyer/jsdyer.github.io). Each tool still builds
-independently. The hub generates the visitor Worker ID list, watchdog targets and sitemap; deploy and verify the affected services before considering the release complete. Update the hub record when listing metadata changes; the hub is the
-authority for discovery. Every change must follow the [mandatory lifecycle](https://github.com/jsdyer/jsdyer.github.io/blob/main/docs/tool-lifecycle.md). App-only changes may leave integrations unchanged, but this must be checked; documentation, source fields, schedules and registration changes also require the hub update.
-
-The main site separates **Use in your browser** from **Install yourself**. An app
-that asks for a file is still a browser tool. Standalone Linux packages should start
-in their own repositories with their own build/release workflow, rather than copying
-this browser-only scaffold. Their hub record uses `access: "install"`, links to an
-installation guide, and includes `requirements`.
-
-## Files
-
-| Path | Purpose |
-| --- | --- |
-| `tool.json` | Page metadata and a ready-to-copy catalogue record |
-| `web/` | HTML, responsive CSS, DOM interactions and separate model logic |
-| `scripts/build.py` | Escape metadata and build `web/` into `dist/` |
-| `scripts/init.py` | Set a new project's identity |
-| `scripts/add_schedule_guard.py` | Add an opt-in guard for explicitly selected scheduled collectors |
-| `tests/` | Application and builder tests |
-| `.github/workflows/pages.yml` | Check PRs and publish successful main builds |
-| `AGENTS.md` | Instructions for future coding work |
-
-Namespace optional storage as `coolcode:<tool-id>:<key>`; CoolCode paths share a
-browser origin. Don't save pasted text/uploads by default. Document external APIs
-and send only the information needed for the selected action. Never embed secrets.
-
-Scheduled refresh is opt-in. Validate source data before deploying, display its date,
-and preserve the last good deployment on failure. Public-repository schedules can
-stop after 60 days without repository activity.
-
-When adding a collector with `on.schedule`, also keep `workflow_dispatch` available
-for the independent Linux server scheduler. Generate a separate schedule guard,
-listing every scheduled collector in the repository:
-
-```sh
-python3 scripts/add_schedule_guard.py --repository jsdyer/my-tool .github/workflows/pages.yml
-```
-
-Replace the repository and workflow paths with the real values. Review the generated
-allowlist, commit `.github/workflows/schedule-guard.yml`, and verify its first push
-run. Re-run the command with the complete list when adding, renaming or removing a
-collector. The guard runs weekly, independently of collector failures, and calls
-GitHub's enable-workflow API for those paths and itself. It restores workflows
-disabled for inactivity and preserves manually disabled workflows. It does not
-fetch data, create dummy commits or change source/check timestamps.
-
-This is an interim mitigation: GitHub does not document active-workflow renewal as
-a permanent exemption, and scheduled runs can be delayed or dropped. Register the
-collector and its freshness expectations in the independent server scheduler too.
-Document its real data check, collection and publication steps in the tool README.
-The starter has no scheduled collector and therefore ships no recurring guard job.
-
-Templates don't propagate future edits automatically. Adopt fixes explicitly and
-consider a versioned reusable workflow once several tools confirm the shared process.
-Choose and add the intended software license before distributing a new project.
-
-## Search metadata
-
-Initialize the page title with a concise task phrase, while keeping the creative
-app name in `--title`:
-
-```sh
-python3 scripts/init.py line-cleaner --title "Line Cleaner" --description "Trim lines and remove exact duplicates in your browser." --search-title "Trim Lines & Remove Duplicates"
-```
-
-The build adds static `WebApplication` JSON-LD, a free CAD offer and social metadata.
-For initialized jsdyer tools it also adds the canonical CoolCode URL. Forks and the
-uninitialized template do not claim a CoolCode canonical. Review the application
-category in `scripts/build.py` when adapting the tool; the starter is a utility.
-Do not invent ratings or reviews. Search markup does not guarantee a rich result.
-
-For a saved public dataset, pass Dataset objects to `add_search_metadata` from the
-app builder, with actual source attribution, licence, coverage and download URLs.
-Derive counts and dates from the same snapshot used by the app and show those details
-on the page. Keep source edition, retrieval and page-build time distinct. Omit an
-unknown source modification date instead of setting it to the current build time.
-Read the hub's `docs/search-discovery.md` for the release checklist.
+CI uses Ubuntu 24.04's installed Google Chrome. Browser tests exercise arbitrary ASNs outside the presets, safe source text, IPv6 filtering, saved dated pairs, JSON download, partial-source failure preservation and mobile layout. Build output `dist/` is ignored. Follow `AGENTS.md` and the hub's tool lifecycle for catalogue, sitemap, Worker and watchdog integration.

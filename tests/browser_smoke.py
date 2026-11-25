@@ -1,53 +1,44 @@
-"""Exercise the built starter at a project subpath in Chromium."""
+"""Browser behavior at a project subpath; mocks arbitrary live ASN source responses."""
 from functools import partial
-from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+from http.server import SimpleHTTPRequestHandler,ThreadingHTTPServer
 from pathlib import Path
+import json
+import os
 import shutil
 import tempfile
 import threading
 from playwright.sync_api import sync_playwright
-
-ROOT = Path(__file__).resolve().parents[1]
-
-
+ROOT=Path(__file__).resolve().parents[1]
 class QuietHandler(SimpleHTTPRequestHandler):
-    def log_message(self, *args):
-        pass
-
+    def log_message(self,*args):pass
 
 def main():
-    screenshots = ROOT / "browser-checks"
-    screenshots.mkdir(exist_ok=True)
+    shots=ROOT/'browser-checks';shots.mkdir(exist_ok=True)
     with tempfile.TemporaryDirectory() as temporary:
-        shutil.copytree(ROOT / "dist", Path(temporary) / "example-tool")
-        server = ThreadingHTTPServer(("127.0.0.1", 0), partial(QuietHandler, directory=temporary))
-        threading.Thread(target=server.serve_forever, daemon=True).start()
+        shutil.copytree(ROOT/'dist',Path(temporary)/'backbonecompare')
+        server=ThreadingHTTPServer(('127.0.0.1',0),partial(QuietHandler,directory=temporary));threading.Thread(target=server.serve_forever,daemon=True).start()
         try:
             with sync_playwright() as p:
-                browser = p.chromium.launch()
-                page = browser.new_page(viewport={"width": 1280, "height": 1000})
-                errors = []
-                page.on("pageerror", lambda error: errors.append(str(error)))
-                page.goto(f"http://127.0.0.1:{server.server_port}/example-tool/")
-                page.locator("#sample").click()
-                assert page.locator("#output").input_value() == "Halifax\nLangley\nVancouver"
-                assert "1 duplicate removed" in page.locator("#status").inner_text()
-                page.locator("#input").fill('<img src=x onerror="alert(1)">\n<img src=x onerror="alert(1)">')
-                assert page.locator("#output").input_value() == '<img src=x onerror="alert(1)">'
-                assert page.locator("img").count() == 0
-                page.locator("#clear").click()
-                assert page.locator("#output").input_value() == ""
-                page.locator("#sample").click()
-                page.screenshot(path=str(screenshots / "desktop.png"), full_page=True)
-                page.set_viewport_size({"width": 390, "height": 844})
-                assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth")
-                page.screenshot(path=str(screenshots / "mobile.png"), full_page=True)
-                assert not errors, errors
-                browser.close()
-            print("Browser checks passed: project subpath, sample, clear, safe text and mobile layout")
-        finally:
-            server.shutdown()
-
-
-if __name__ == "__main__":
-    main()
+                browser=p.chromium.launch(executable_path=os.environ.get('CHROMIUM_PATH'),args=['--no-sandbox'])
+                page=browser.new_page(viewport={'width':1360,'height':1000});errors=[];page.on('pageerror',lambda e:errors.append(str(e)))
+                def ripe(route):
+                    number=int(route.request.url.rsplit('AS',1)[1]);route.fulfill(json={'status':'ok','data':{'resource':str(number),'query_starttime':'2026-11-20T00:00:00','neighbours':[{'asn':13335,'type':'left','v4_peers':10,'v6_peers':0},{'asn':15169,'type':'right','v4_peers':0,'v6_peers':5}]}})
+                def peering(route):
+                    from urllib.parse import urlparse,parse_qs
+                    number=int(parse_qs(urlparse(route.request.url).query)['asn'][0]);route.fulfill(json={'data':[{'asn':number,'id':number,'name':'<img src=x> Example network','updated':'2026-11-10T00:00:00Z','netixlan_set':[{'ix_id':10,'ixlan_id':10,'name':'Test IX','status':'ok','ipaddr4':'192.0.2.1','ipaddr6':'2001:db8::1','updated':'2026-11-01T00:00:00Z'}],'netfac_set':[{'fac_id':10,'name':'Test facility','city':'Ottawa','country':'CA','status':'ok','updated':'2026-11-01T00:00:00Z'}]}]})
+                page.route('https://stat.ripe.net/data/**',ripe);page.route('https://www.peeringdb.com/api/**',peering)
+                page.goto(f'http://127.0.0.1:{server.server_port}/backbonecompare/');page.locator('#workspace').wait_for(state='visible')
+                page.locator('#asn-a').fill('AS123456');page.locator('#asn-b').fill('654321');page.locator('#compare').click();page.wait_for_function("document.getElementById('network-cards').textContent.includes('AS123456')")
+                assert page.locator('img').count()==0;assert 'AS13335' in page.locator('#evidence-list').inner_text();assert 'AS15169' in page.locator('#evidence-list').inner_text()
+                page.locator('#family').select_option('v6');assert 'AS13335' not in page.locator('#evidence-list').inner_text();assert 'AS15169' in page.locator('#evidence-list').inner_text()
+                page.locator('#tab-exchanges').click();assert 'Test IX' in page.locator('#evidence-list').inner_text()
+                page.locator('#pair-label').fill('My backup comparison');page.locator('#notes').fill('Ask about shared ducts');page.locator('#save').click();page.locator('#notes').fill('changed');page.get_by_role('button',name='My backup comparison',exact=True).click();assert page.locator('#notes').input_value()=='Ask about shared ducts'
+                with page.expect_download() as download:page.locator('#export').click()
+                value=json.loads(Path(download.value.path()).read_text());assert value['networks'][0]['asn']==123456;assert value['networks'][0]['bgp']['observed_at']=='2026-11-20T00:00:00Z'
+                page.route('https://www.peeringdb.com/api/**',lambda route:route.fulfill(status=503,json={'error':'unavailable'}))
+                page.locator('#refresh').click();page.wait_for_function("!document.getElementById('refresh').disabled");assert 'previous evidence retained' in page.locator('#network-cards').inner_text();assert 'Test IX' in page.locator('#evidence-list').inner_text()
+                page.screenshot(path=str(shots/'desktop.png'),full_page=True);page.set_viewport_size({'width':390,'height':844});assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth');page.screenshot(path=str(shots/'mobile.png'),full_page=True)
+                assert not errors,errors;browser.close()
+            print('Browser checks passed: arbitrary pair, safe text, IPv6 filter, saved evidence, export, partial-source failure and mobile layout')
+        finally:server.shutdown()
+if __name__=='__main__':main()

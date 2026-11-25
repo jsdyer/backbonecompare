@@ -1,0 +1,16 @@
+{
+  "asns": [
+    852,
+    577,
+    812,
+    6327
+  ],
+  "default_pair": [
+    852,
+    577
+  ],
+  "max_saved_pairs": 20,
+  "request_timeout_seconds": 75,
+  "request_interval_seconds": 3.1,
+  "peering_api_base": "https://www.peeringdb.com/api"
+}
