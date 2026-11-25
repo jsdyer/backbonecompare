@@ -17,6 +17,23 @@
   "access": "browser",
   "data_info": {
     "mode": "mixed",
-    "detail": "RIPE RIS path observations and PeeringDB exchange/facility listings, with dated captures and public ASN lookups."
+    "detail": "RIPE RIS path observations and PeeringDB exchange/facility listings, with dated captures and public ASN lookups.",
+    "cadence": "Daily",
+    "probes": [
+      {
+        "url": "https://coolcode.ca/backbonecompare/data/status.json",
+        "path": [
+          "checked_at"
+        ],
+        "precision": "minute",
+        "label": "Network sources checked",
+        "count_at": {
+          "path": [
+            "count"
+          ],
+          "unit": "networks"
+        }
+      }
+    ]
   }
 }
