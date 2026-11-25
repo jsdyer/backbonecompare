@@ -1,7 +1,7 @@
 {
   "id": "backbonecompare",
   "title": "Backbone Compare",
-  "description": "Compare observed BGP neighbours and listed network exchanges and facilities for any two ASNs.",
+  "description": "Find providers by name or ASN and compare observed BGP neighbours, exchanges and facilities.",
   "category": "liminal-tools",
   "tags": [
     "networks",
@@ -17,7 +17,7 @@
   "access": "browser",
   "data_info": {
     "mode": "mixed",
-    "detail": "RIPE RIS path observations and PeeringDB exchange/facility listings, with dated captures and public ASN lookups.",
+    "detail": "RIPE RIS observations and PeeringDB listings, with a Canadian starter directory, public provider search and dated ASN captures.",
     "cadence": "Daily",
     "probes": [
       {

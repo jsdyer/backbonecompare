@@ -3,7 +3,11 @@
     852,
     577,
     812,
-    6327
+    6327,
+    11260,
+    855,
+    5645,
+    803
   ],
   "default_pair": [
     852,
@@ -12,5 +16,20 @@
   "max_saved_pairs": 20,
   "request_timeout_seconds": 75,
   "request_interval_seconds": 3.1,
-  "peering_api_base": "https://www.peeringdb.com/api"
+  "peering_api_base": "https://www.peeringdb.com/api",
+  "directory_asns": [
+    577,
+    803,
+    812,
+    852,
+    855,
+    3257,
+    5645,
+    6327,
+    11260,
+    11814,
+    13335,
+    21949,
+    26677
+  ]
 }

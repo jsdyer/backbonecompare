@@ -5,12 +5,12 @@ Compare the public evidence for two networks: observed BGP neighbours, listed In
 **Use it:** https://coolcode.ca/backbonecompare/ · **Source:** https://github.com/jsdyer/backbonecompare
 
 <!-- coolcode:guide -->
-Enter any two ASNs to compare RIPE RIS neighbours and PeeringDB exchange/facility listings. Filter IPv4 or IPv6 evidence, inspect shared and one-sided records, and see observation dates separately from fetch dates. Save named private pairs with notes, export JSON/CSV, or import earlier evidence. Uncertain RIS observations are excluded by default. Shared directory listings and AS-path adjacency do not prove physical route diversity, direct peering or a contractual transit relationship.
+Find providers by name, alias or ASN, including Eastlink (AS11260 / Bragg Communications), then compare RIPE RIS neighbours and PeeringDB exchange/facility listings. Filter IPv4 or IPv6 evidence, inspect shared and one-sided records, and see observation dates separately from fetch dates. Save named private pairs with notes, export JSON/CSV, or import earlier evidence. Uncertain RIS observations are excluded by default. Shared directory listings and AS-path adjacency do not prove physical route diversity, direct peering or a contractual transit relationship.
 <!-- /coolcode:guide -->
 
 ## Use the evidence
 
-1. Enter AS numbers with or without `AS`. Four published examples are starting points; arbitrary valid 32-bit ASNs can be looked up directly.
+1. Filter the starter directory locally and choose **Use as A/B**, or press **Search PeeringDB** for public name/alias matches. Search results are bounded to 25 per field; narrow a broad query. A brand may have multiple ASNs. Enter AS numbers with or without `AS`. Eight captured networks and a 13-network directory are starting points; arbitrary valid 32-bit ASNs can be looked up directly.
 2. Compare shared records, records only in A's capture or records only in B's capture. Search and pagination work over the full evidence set, including large networks.
 3. Choose IPv4 or IPv6. For BGP, this requires positive `v4_peers` / `v6_peers` observation counts. For exchange listings, it requires a listed address. Facilities are independent of this filter.
 4. Save a private comparison name, notes and evidence in this browser, or export it. JSON captures retain each source's observation and check dates. CSV exports the current family and uncertainty filters; it includes both networks' source records so comparisons can be independently checked. Importing or restoring does not silently replace evidence with newer results.
@@ -32,7 +32,7 @@ PeeringDB records are participant-maintained. Multiple LAN memberships collapse 
 
 `checked_at` records a successful fetch; RIPE's `query_starttime` is displayed separately as “Observed”. PeeringDB's network and membership `updated` dates describe directory edits. A newly checked source can still contain older observations. No source date is replaced with the build date.
 
-Published defaults are fetched from this site. New ASN lookups and explicit refreshes send each ASN separately to RIPEstat and PeeringDB; those services receive normal request metadata including the visitor's IP address. Notes, pair labels and imports remain local. Save is explicit, using `coolcode:backbonecompare:pairs` in localStorage. The standard CoolCode aggregate visit counter also runs. No secret is sent to the visitor's browser.
+Published defaults are fetched from this site. The Search PeeringDB button sends the entered name/alias query to PeeringDB (typing alone remains local). New ASN lookups and explicit refreshes send each ASN separately to RIPEstat and PeeringDB; those services receive normal request metadata including the visitor's IP address. Notes, pair labels and imports remain local. Save is explicit, using `coolcode:backbonecompare:pairs` in localStorage. The standard CoolCode aggregate visit counter also runs. No secret is sent to the visitor's browser.
 
 ## Optional key: exact location
 
@@ -50,7 +50,8 @@ The key is optional: public GET requests work without it. It is sent as `Authori
 
 Edit `config/watchlist.json`:
 
-- `asns`: baseline ASN integers (currently 852, 577, 812 and 6327). Add another valid ASN here; no frontend enumeration or hardcoded count must change. The collector validates each returned ASN. A valid ASN may have no observed neighbours or no directory listing.
+- `asns`: baseline ASN integers (currently TELUS, Bell, Rogers, Shaw, Eastlink, Bell Aliant, TekSavvy and SaskTel). Add another valid ASN here; no frontend enumeration or hardcoded count must change. The collector validates each returned ASN. A valid ASN may have no observed neighbours or no directory listing.
+- `directory_asns`: lightweight PeeringDB name/alias entries, independent of the larger evidence baseline. Add verified ASN integers here, up to 100; returned fields are validated and contact data is excluded. Arbitrary public name search remains available without editing this list.
 - `default_pair`: two distinct ASNs present in the baseline.
 - `max_saved_pairs`: local saved-pair limit (default 20, bounded to 50).
 - `request_timeout_seconds`: source timeout (default 75; browser bounds 15–120).

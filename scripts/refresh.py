@@ -7,7 +7,7 @@ import os
 from pathlib import Path
 import tempfile
 import time
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, urlencode
 from urllib.request import Request, build_opener, HTTPRedirectHandler
 ROOT=Path(__file__).resolve().parents[1]
 AGENT='BackboneCompare/1.0 (+https://github.com/jsdyer/backbonecompare/issues)'
@@ -62,6 +62,17 @@ def peering(body,asn):
         record[kind]=[{key:row.get(key) for key in fields} for row in rows if row.get('status')=='ok']
     return {'data':[record]}
 
+def provider_directory(body,expected):
+    if not isinstance(body,dict) or not isinstance(body.get('data'),list) or len(body['data'])>100:raise ValueError('Invalid provider directory')
+    rows=[];seen=set()
+    for row in body['data']:
+        if not isinstance(row,dict) or not valid_asn(row.get('asn')) or row['asn'] not in expected or row['asn'] in seen or type(row.get('id')) is not int or row['id']<1:raise ValueError('Unexpected provider directory entry')
+        if not isinstance(row.get('name'),str) or not row['name'].strip():raise ValueError('Missing provider name')
+        seen.add(row['asn'])
+        rows.append({key:str(row.get(key) or '')[:500] for key in ('name','aka','name_long','updated')}|{'id':row['id'],'asn':row['asn']})
+    if not rows:raise ValueError('Empty configured provider directory')
+    return rows
+
 def collect(config,fetcher=fetch,sleep=time.sleep,now=None):
     asns=config['asns']
     if not isinstance(asns,list) or not asns or len(asns)>50 or len(set(asns))!=len(asns) or not all(valid_asn(asn) for asn in asns):raise ValueError('Invalid configured ASN watchlist')
@@ -74,7 +85,14 @@ def collect(config,fetcher=fetch,sleep=time.sleep,now=None):
         pdb=peering(fetcher(f'https://www.peeringdb.com/api/net?asn={asn}&depth=2',timeout=config.get('request_timeout_seconds',75)),asn)
         networks[str(asn)]={'asn':asn,'checked_at':now,'ripe':bgp,'peering':pdb}
         print(f'Validated AS{asn}: {len(bgp["data"]["neighbours"])} observation rows',flush=True)
-    return {'schema':1,'checked_at':now,'networks':networks,'config':{k:config[k] for k in ('default_pair','max_saved_pairs','request_timeout_seconds','peering_api_base')}}
+    providers=[]
+    if config.get('directory_asns'):
+        numbers=config['directory_asns']
+        if not isinstance(numbers,list) or len(numbers)>100 or len(set(numbers))!=len(numbers) or not all(valid_asn(n) for n in numbers):raise ValueError('Invalid directory ASN list')
+        sleep(max(3.1,float(config.get('request_interval_seconds',3.1))))
+        query=urlencode({'asn__in':','.join(map(str,numbers)),'fields':'id,asn,name,aka,name_long,updated','limit':100})
+        providers=provider_directory(fetcher('https://www.peeringdb.com/api/net?'+query,timeout=config.get('request_timeout_seconds',75)),numbers)
+    return {'schema':1,'checked_at':now,'networks':networks,'providers':providers,'config':{k:config[k] for k in ('default_pair','max_saved_pairs','request_timeout_seconds','peering_api_base')}}
 
 def write(path,data):
     path.parent.mkdir(parents=True,exist_ok=True)

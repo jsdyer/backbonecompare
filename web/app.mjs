@@ -1,4 +1,4 @@
-import {asn,bgp,directory,fromCapture,compare,pair,readPair,evidenceCsv} from './model.mjs';
+import {asn,bgp,directory,fromCapture,compare,pair,readPair,evidenceCsv,providers,matchingProviders} from './model.mjs';
 const $=id=>document.getElementById(id),KEY='coolcode:backbonecompare:pairs';
 const node=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
 let baseline,config={},current=[],cache=new Map(),kind='bgp',pageIndex=0,busy=false;
@@ -21,6 +21,40 @@ function render(){if(current.length!==2)return;networkCards();const result=compa
 async function fetchJson(url){const response=await fetch(url,{signal:AbortSignal.timeout(Math.min(120,Math.max(15,Number(config.request_timeout_seconds)||75))*1000)});if(response.status===429)throw new Error(`Source rate limit; retry after ${response.headers.get('Retry-After')||'a short wait'} seconds.`);if(!response.ok)throw new Error(`Source returned HTTP ${response.status}.`);return response.json();}
 async function lookup(number,force){if(cache.has(number)&&!force)return cache.get(number);const previous=cache.get(number),result={asn:number};const now=new Date().toISOString();const fetched=await Promise.allSettled([fetchJson(`https://stat.ripe.net/data/asn-neighbours/data.json?resource=AS${number}`).then(body=>bgp(body,number,now)),fetchJson(`${config.peering_api_base||'https://www.peeringdb.com/api'}/net?asn=${number}&depth=2`).then(body=>directory(body,number,now))]);for(const [i,key] of ['bgp','directory'].entries()){const response=fetched[i];if(response.status==='fulfilled')result[key]=response.value;else{const message=response.reason?.message||'Source request failed.';result[key]=previous?.[key]?.ok?{...previous[key],error:message}:{ok:false,error:message};}}cache.set(number,result);return result;}
 async function run(force=false){if(busy)return;let numbers;try{numbers=[asn($('asn-a').value),asn($('asn-b').value)];if(numbers[0]===numbers[1])throw new Error('Choose two different ASNs.');}catch(error){status(error.message);return;}busy=true;$('compare').disabled=true;$('refresh').disabled=true;status('Loading each network’s public evidence…');try{const change=current.length&&current.some((n,i)=>n.asn!==numbers[i]);current=await Promise.all(numbers.map(n=>lookup(n,force)));if(change){$('notes').value='';$('pair-label').value='';}pageIndex=0;render();$('workspace').hidden=false;const failures=current.flatMap(n=>[n.bgp,n.directory]).filter(s=>s.error).length;status(failures?`${failures} source request${failures===1?'':'s'} unavailable. Review the dated evidence and source messages below.`:'Comparison ready. Inspect source dates before using it in a decision.');}catch(error){status(error.message);}finally{busy=false;$('compare').disabled=false;$('refresh').disabled=false;}}
+let providerRows=[],remoteRows=[],providerBusy=false,providerQuery='',providerMessage='',providerCache=new Map();
+function renderProviders(){
+  const term=$('provider-query').value.trim(),all=new Map(providerRows.map(row=>[row.asn,row]));
+  if(term.toLowerCase()===providerQuery)for(const row of remoteRows)all.set(row.asn,row);
+  const rows=matchingProviders([...all.values()],term);$('provider-results').replaceChildren();
+  $('provider-status').textContent=(term.toLowerCase()===providerQuery&&providerMessage?providerMessage+' ':'')+`${rows.length} matching network${rows.length===1?'':'s'}${rows.length>25?'; showing first 25':''}. `+(rows.length?'Choose a side, then Compare networks.':'Try the public search or enter a known ASN above.');
+  for(const row of rows.slice(0,25)){
+    const item=node('article',undefined,'provider-result'),label=node('div');label.append(node('strong',row.name),node('small',`AS${row.asn}${row.aka?' · '+row.aka:''}${cache.has(row.asn)?' · published evidence available':' · live evidence lookup'}`));item.append(label);
+    for(const side of ['a','b']){const button=node('button','Use as '+side.toUpperCase(),'secondary');button.type='button';button.setAttribute('aria-label',`Use ${row.name} AS${row.asn} as ${side.toUpperCase()}`);button.onclick=()=>{$('asn-'+side).value=String(row.asn);status(`Selected ${row.name} as ${side.toUpperCase()}. Press Compare networks to load the pair.`);$('asn-'+side).focus();};item.append(button);}
+    item.append(link('Directory ↗',`https://www.peeringdb.com/net/${row.id}`));$('provider-results').append(item);
+  }
+}
+$('provider-query').oninput=renderProviders;
+$('provider-form').onsubmit=async event=>{
+  event.preventDefault();if(providerBusy)return;const term=$('provider-query').value.trim();
+  if(term.length<2){$('provider-status').textContent='Enter at least two characters to search PeeringDB.';return;}
+  providerBusy=true;$('provider-search').disabled=true;$('provider-status').textContent='Searching public network names and aliases…';
+  const key=term.toLowerCase();providerQuery=key;remoteRows=[];providerMessage='';
+  try{
+    const saved=providerCache.get(key);
+    if(saved&&Date.now()-saved.at<300000){remoteRows=saved.rows;providerMessage=saved.message;}
+    else{
+      const merged=new Map();let partial=[],limited=false;
+      for(const [index,field] of ['name__contains','aka__contains'].entries()){
+        if(index)await new Promise(resolve=>setTimeout(resolve,3100));
+        try{const query=new URLSearchParams({[field]:term,fields:'id,asn,name,aka,name_long',limit:'25'});const rows=providers(await fetchJson(`https://www.peeringdb.com/api/net?${query}`));if(rows.length===25)limited=true;for(const row of rows)merged.set(row.asn,row);}
+        catch(error){partial.push(error.message);}
+      }
+      remoteRows=[...merged.values()];providerMessage=partial.length?'Search incomplete: '+[...new Set(partial)].join(' '):limited?'Public search reached its result limit; use a more specific name.':'Public name and alias search finished.';
+      if(!partial.length)providerCache.set(key,{at:Date.now(),rows:remoteRows,message:providerMessage});
+    }
+    renderProviders();
+  }finally{providerBusy=false;$('provider-search').disabled=false;}
+};
 $('compare-form').onsubmit=event=>{event.preventDefault();run();};$('refresh').onclick=()=>run(true);
 for(const id of ['family','relationship','uncertain','filter'])$(id).addEventListener(id==='filter'?'input':'change',()=>{pageIndex=0;render();});
 for(const button of document.querySelectorAll('[data-kind]')){button.onclick=()=>{kind=button.dataset.kind;pageIndex=0;render();};button.onkeydown=event=>{if(['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){event.preventDefault();const all=[...document.querySelectorAll('[data-kind]')],i=all.indexOf(button),index=event.key==='Home'?0:event.key==='End'?all.length-1:(i+(event.key==='ArrowRight'?1:all.length-1))%all.length;all[index].click();all[index].focus();}};}
@@ -32,4 +66,4 @@ $('save').onclick=()=>{try{const records=saved();if(records.length>=savedLimit()
 $('export').onclick=()=>download('backbonecompare-pair.json',JSON.stringify(pair(current,$('notes').value,$('pair-label').value),null,2),'application/json');
 $('csv').onclick=()=>download(`backbonecompare-${$('family').value}-evidence.csv`,evidenceCsv(current,$('family').value,$('uncertain').checked),'text/csv');
 $('import').onchange=async()=>{try{const file=$('import').files[0];if(!file)return;if(file.size>8000000)throw new Error('Pair file must be smaller than 8 MB.');apply(JSON.parse(await file.text()));}catch(error){status(error.message);}finally{$('import').value='';}};
-try{const response=await fetch('./data/networks.json');if(!response.ok)throw new Error('The published capture is unavailable. Reload to try again.');baseline=await response.json();if(baseline.schema!==1||!baseline.networks||!baseline.config)throw new Error('Published capture format is invalid.');config=baseline.config;for(const raw of Object.values(baseline.networks)){const net=fromCapture(raw);cache.set(net.asn,net);const option=node('option',net.directory.name);option.value=String(net.asn);$('networks').append(option);}$('asn-a').value=asn(config.default_pair[0]);$('asn-b').value=asn(config.default_pair[1]);$('baseline-date').textContent=`Published baseline checked ${formatDate(baseline.checked_at)}; ${cache.size} starter networks. New ASNs can be looked up without changing the baseline.`;renderSaved();await run();}catch(error){status(error.message);}
+try{const response=await fetch('./data/networks.json');if(!response.ok)throw new Error('The published capture is unavailable. Reload to try again.');baseline=await response.json();if(baseline.schema!==1||!baseline.networks||!baseline.config)throw new Error('Published capture format is invalid.');config=baseline.config;for(const raw of Object.values(baseline.networks)){const net=fromCapture(raw);cache.set(net.asn,net);const option=node('option',net.directory.name);option.value=String(net.asn);$('networks').append(option);}providerRows=baseline.providers?.length?providers({data:baseline.providers}):[...cache.values()].filter(n=>n.directory?.net_id).map(n=>({asn:n.asn,id:n.directory.net_id,name:n.directory.name,aka:'',name_long:''}));renderProviders();$('asn-a').value=asn(config.default_pair[0]);$('asn-b').value=asn(config.default_pair[1]);$('baseline-date').textContent=`Published baseline checked ${formatDate(baseline.checked_at)}; ${cache.size} captured networks and ${providerRows.length} directory entries. New ASNs can be looked up without changing the baseline.`;renderSaved();await run();}catch(error){status(error.message);}

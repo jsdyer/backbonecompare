@@ -1,10 +1,10 @@
 {
   "schema": 1,
-  "checked_at": "2026-11-25T05:49:30Z",
+  "checked_at": "2026-11-25T06:39:02Z",
   "networks": {
     "852": {
       "asn": 852,
-      "checked_at": "2026-11-25T05:49:30Z",
+      "checked_at": "2026-11-25T06:39:02Z",
       "ripe": {
         "status": "ok",
         "data": {
@@ -4544,7 +4544,7 @@
     },
     "577": {
       "asn": 577,
-      "checked_at": "2026-11-25T05:49:30Z",
+      "checked_at": "2026-11-25T06:39:02Z",
       "ripe": {
         "status": "ok",
         "data": {
@@ -7113,7 +7113,7 @@
     },
     "812": {
       "asn": 812,
-      "checked_at": "2026-11-25T05:49:30Z",
+      "checked_at": "2026-11-25T06:39:02Z",
       "ripe": {
         "status": "ok",
         "data": {
@@ -8920,7 +8920,7 @@
     },
     "6327": {
       "asn": 6327,
-      "checked_at": "2026-11-25T05:49:30Z",
+      "checked_at": "2026-11-25T06:39:02Z",
       "ripe": {
         "status": "ok",
         "data": {
@@ -11028,8 +11028,2489 @@
           }
         ]
       }
+    },
+    "11260": {
+      "asn": 11260,
+      "checked_at": "2026-11-25T06:39:02Z",
+      "ripe": {
+        "status": "ok",
+        "data": {
+          "resource": "11260",
+          "query_starttime": "2026-11-24T00:00:00",
+          "query_endtime": "2026-11-24T00:00:00",
+          "neighbours": [
+            {
+              "asn": 1031,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 1267,
+              "type": "left",
+              "power": 3,
+              "v4_peers": 6,
+              "v6_peers": 0
+            },
+            {
+              "asn": 12779,
+              "type": "left",
+              "power": 4,
+              "v4_peers": 25,
+              "v6_peers": 0
+            },
+            {
+              "asn": 1299,
+              "type": "left",
+              "power": 1475,
+              "v4_peers": 12752,
+              "v6_peers": 153
+            },
+            {
+              "asn": 13030,
+              "type": "left",
+              "power": 51,
+              "v4_peers": 761,
+              "v6_peers": 18
+            },
+            {
+              "asn": 14840,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 20,
+              "v6_peers": 0
+            },
+            {
+              "asn": 15802,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 15958,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 174,
+              "type": "left",
+              "power": 1430,
+              "v4_peers": 10520,
+              "v6_peers": 102
+            },
+            {
+              "asn": 20473,
+              "type": "left",
+              "power": 9,
+              "v4_peers": 0,
+              "v6_peers": 11
+            },
+            {
+              "asn": 20562,
+              "type": "left",
+              "power": 3,
+              "v4_peers": 6,
+              "v6_peers": 0
+            },
+            {
+              "asn": 21215,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 25091,
+              "type": "left",
+              "power": 8,
+              "v4_peers": 30,
+              "v6_peers": 0
+            },
+            {
+              "asn": 286,
+              "type": "left",
+              "power": 27,
+              "v4_peers": 226,
+              "v6_peers": 10
+            },
+            {
+              "asn": 2914,
+              "type": "left",
+              "power": 857,
+              "v4_peers": 7408,
+              "v6_peers": 132
+            },
+            {
+              "asn": 3214,
+              "type": "left",
+              "power": 4,
+              "v4_peers": 15,
+              "v6_peers": 0
+            },
+            {
+              "asn": 3216,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 3257,
+              "type": "left",
+              "power": 672,
+              "v4_peers": 4323,
+              "v6_peers": 88
+            },
+            {
+              "asn": 3303,
+              "type": "left",
+              "power": 129,
+              "v4_peers": 910,
+              "v6_peers": 5
+            },
+            {
+              "asn": 3356,
+              "type": "left",
+              "power": 747,
+              "v4_peers": 5557,
+              "v6_peers": 40
+            },
+            {
+              "asn": 33891,
+              "type": "left",
+              "power": 81,
+              "v4_peers": 576,
+              "v6_peers": 0
+            },
+            {
+              "asn": 34019,
+              "type": "left",
+              "power": 6,
+              "v4_peers": 25,
+              "v6_peers": 0
+            },
+            {
+              "asn": 34549,
+              "type": "left",
+              "power": 54,
+              "v4_peers": 542,
+              "v6_peers": 19
+            },
+            {
+              "asn": 34927,
+              "type": "left",
+              "power": 6,
+              "v4_peers": 20,
+              "v6_peers": 0
+            },
+            {
+              "asn": 35280,
+              "type": "left",
+              "power": 41,
+              "v4_peers": 277,
+              "v6_peers": 0
+            },
+            {
+              "asn": 37100,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 3741,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 37468,
+              "type": "left",
+              "power": 4,
+              "v4_peers": 10,
+              "v6_peers": 0
+            },
+            {
+              "asn": 37497,
+              "type": "left",
+              "power": 4,
+              "v4_peers": 10,
+              "v6_peers": 0
+            },
+            {
+              "asn": 41327,
+              "type": "left",
+              "power": 4,
+              "v4_peers": 10,
+              "v6_peers": 0
+            },
+            {
+              "asn": 4455,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 48362,
+              "type": "left",
+              "power": 4,
+              "v4_peers": 20,
+              "v6_peers": 0
+            },
+            {
+              "asn": 50304,
+              "type": "left",
+              "power": 6,
+              "v4_peers": 15,
+              "v6_peers": 0
+            },
+            {
+              "asn": 5405,
+              "type": "left",
+              "power": 8,
+              "v4_peers": 20,
+              "v6_peers": 0
+            },
+            {
+              "asn": 60068,
+              "type": "left",
+              "power": 71,
+              "v4_peers": 994,
+              "v6_peers": 11
+            },
+            {
+              "asn": 60171,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 6057,
+              "type": "left",
+              "power": 4,
+              "v4_peers": 10,
+              "v6_peers": 0
+            },
+            {
+              "asn": 61568,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 6204,
+              "type": "left",
+              "power": 1,
+              "v4_peers": 4,
+              "v6_peers": 0
+            },
+            {
+              "asn": 6453,
+              "type": "left",
+              "power": 399,
+              "v4_peers": 2853,
+              "v6_peers": 38
+            },
+            {
+              "asn": 6461,
+              "type": "left",
+              "power": 2582,
+              "v4_peers": 28770,
+              "v6_peers": 601
+            },
+            {
+              "asn": 6762,
+              "type": "left",
+              "power": 670,
+              "v4_peers": 5444,
+              "v6_peers": 81
+            },
+            {
+              "asn": 6797,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 10,
+              "v6_peers": 0
+            },
+            {
+              "asn": 6939,
+              "type": "left",
+              "power": 1236,
+              "v4_peers": 3661,
+              "v6_peers": 2191
+            },
+            {
+              "asn": 7195,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 9044,
+              "type": "left",
+              "power": 2,
+              "v4_peers": 10,
+              "v6_peers": 0
+            },
+            {
+              "asn": 11269,
+              "type": "right",
+              "power": 226,
+              "v4_peers": 965,
+              "v6_peers": 8
+            },
+            {
+              "asn": 14789,
+              "type": "right",
+              "power": 434,
+              "v4_peers": 331,
+              "v6_peers": 348
+            },
+            {
+              "asn": 14965,
+              "type": "right",
+              "power": 286,
+              "v4_peers": 1655,
+              "v6_peers": 0
+            },
+            {
+              "asn": 1634,
+              "type": "right",
+              "power": 265,
+              "v4_peers": 330,
+              "v6_peers": 0
+            },
+            {
+              "asn": 18814,
+              "type": "right",
+              "power": 187,
+              "v4_peers": 479,
+              "v6_peers": 0
+            },
+            {
+              "asn": 19772,
+              "type": "right",
+              "power": 239,
+              "v4_peers": 618,
+              "v6_peers": 0
+            },
+            {
+              "asn": 21564,
+              "type": "right",
+              "power": 275,
+              "v4_peers": 1321,
+              "v6_peers": 0
+            },
+            {
+              "asn": 21659,
+              "type": "right",
+              "power": 150,
+              "v4_peers": 357,
+              "v6_peers": 45
+            },
+            {
+              "asn": 22372,
+              "type": "right",
+              "power": 55,
+              "v4_peers": 91,
+              "v6_peers": 0
+            },
+            {
+              "asn": 22393,
+              "type": "right",
+              "power": 159,
+              "v4_peers": 212,
+              "v6_peers": 0
+            },
+            {
+              "asn": 22423,
+              "type": "right",
+              "power": 287,
+              "v4_peers": 3465,
+              "v6_peers": 0
+            },
+            {
+              "asn": 22636,
+              "type": "right",
+              "power": 54,
+              "v4_peers": 270,
+              "v6_peers": 0
+            },
+            {
+              "asn": 23107,
+              "type": "right",
+              "power": 265,
+              "v4_peers": 330,
+              "v6_peers": 0
+            },
+            {
+              "asn": 23261,
+              "type": "right",
+              "power": 467,
+              "v4_peers": 2311,
+              "v6_peers": 350
+            },
+            {
+              "asn": 23307,
+              "type": "right",
+              "power": 439,
+              "v4_peers": 331,
+              "v6_peers": 347
+            },
+            {
+              "asn": 23313,
+              "type": "right",
+              "power": 264,
+              "v4_peers": 1333,
+              "v6_peers": 0
+            },
+            {
+              "asn": 29939,
+              "type": "right",
+              "power": 264,
+              "v4_peers": 330,
+              "v6_peers": 0
+            },
+            {
+              "asn": 33056,
+              "type": "right",
+              "power": 212,
+              "v4_peers": 266,
+              "v6_peers": 0
+            },
+            {
+              "asn": 33230,
+              "type": "right",
+              "power": 70,
+              "v4_peers": 135,
+              "v6_peers": 55
+            },
+            {
+              "asn": 3695,
+              "type": "right",
+              "power": 268,
+              "v4_peers": 5940,
+              "v6_peers": 0
+            },
+            {
+              "asn": 393907,
+              "type": "right",
+              "power": 233,
+              "v4_peers": 298,
+              "v6_peers": 0
+            },
+            {
+              "asn": 394430,
+              "type": "right",
+              "power": 171,
+              "v4_peers": 226,
+              "v6_peers": 0
+            },
+            {
+              "asn": 394846,
+              "type": "right",
+              "power": 259,
+              "v4_peers": 324,
+              "v6_peers": 0
+            },
+            {
+              "asn": 397545,
+              "type": "right",
+              "power": 570,
+              "v4_peers": 12003,
+              "v6_peers": 0
+            },
+            {
+              "asn": 397888,
+              "type": "right",
+              "power": 23,
+              "v4_peers": 38,
+              "v6_peers": 0
+            },
+            {
+              "asn": 397944,
+              "type": "right",
+              "power": 261,
+              "v4_peers": 329,
+              "v6_peers": 0
+            },
+            {
+              "asn": 398182,
+              "type": "right",
+              "power": 265,
+              "v4_peers": 660,
+              "v6_peers": 0
+            },
+            {
+              "asn": 399031,
+              "type": "right",
+              "power": 159,
+              "v4_peers": 213,
+              "v6_peers": 0
+            },
+            {
+              "asn": 40007,
+              "type": "right",
+              "power": 69,
+              "v4_peers": 408,
+              "v6_peers": 56
+            },
+            {
+              "asn": 400075,
+              "type": "right",
+              "power": 262,
+              "v4_peers": 330,
+              "v6_peers": 0
+            },
+            {
+              "asn": 400833,
+              "type": "right",
+              "power": 297,
+              "v4_peers": 987,
+              "v6_peers": 0
+            },
+            {
+              "asn": 40439,
+              "type": "right",
+              "power": 84,
+              "v4_peers": 125,
+              "v6_peers": 0
+            },
+            {
+              "asn": 53367,
+              "type": "right",
+              "power": 54,
+              "v4_peers": 90,
+              "v6_peers": 0
+            },
+            {
+              "asn": 53455,
+              "type": "right",
+              "power": 259,
+              "v4_peers": 2632,
+              "v6_peers": 0
+            },
+            {
+              "asn": 54658,
+              "type": "right",
+              "power": 252,
+              "v4_peers": 1590,
+              "v6_peers": 0
+            },
+            {
+              "asn": 611,
+              "type": "right",
+              "power": 380,
+              "v4_peers": 4413,
+              "v6_peers": 0
+            },
+            {
+              "asn": 63019,
+              "type": "right",
+              "power": 442,
+              "v4_peers": 1651,
+              "v6_peers": 699
+            },
+            {
+              "asn": 6579,
+              "type": "right",
+              "power": 206,
+              "v4_peers": 1561,
+              "v6_peers": 0
+            },
+            {
+              "asn": 7860,
+              "type": "right",
+              "power": 254,
+              "v4_peers": 318,
+              "v6_peers": 0
+            },
+            {
+              "asn": 7950,
+              "type": "right",
+              "power": 525,
+              "v4_peers": 2958,
+              "v6_peers": 0
+            },
+            {
+              "asn": 933,
+              "type": "right",
+              "power": 262,
+              "v4_peers": 330,
+              "v6_peers": 0
+            },
+            {
+              "asn": 12969,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 13237,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 1403,
+              "type": "uncertain",
+              "power": 42,
+              "v4_peers": 293,
+              "v6_peers": 22
+            },
+            {
+              "asn": 14630,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 16347,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 17639,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 18106,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 1828,
+              "type": "uncertain",
+              "power": 41,
+              "v4_peers": 307,
+              "v6_peers": 10
+            },
+            {
+              "asn": 198150,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 199524,
+              "type": "uncertain",
+              "power": 46,
+              "v4_peers": 298,
+              "v6_peers": 12
+            },
+            {
+              "asn": 204457,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 207841,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 213241,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 22652,
+              "type": "uncertain",
+              "power": 36,
+              "v4_peers": 244,
+              "v6_peers": 11
+            },
+            {
+              "asn": 24482,
+              "type": "uncertain",
+              "power": 54,
+              "v4_peers": 1052,
+              "v6_peers": 32
+            },
+            {
+              "asn": 271253,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 28792,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 29075,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 3170,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 31742,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 34177,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 35266,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 36236,
+              "type": "uncertain",
+              "power": 34,
+              "v4_peers": 248,
+              "v6_peers": 10
+            },
+            {
+              "asn": 37680,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 37721,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 39122,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 42473,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 48070,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 48185,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 15,
+              "v6_peers": 0
+            },
+            {
+              "asn": 49544,
+              "type": "uncertain",
+              "power": 42,
+              "v4_peers": 574,
+              "v6_peers": 20
+            },
+            {
+              "asn": 50300,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 51185,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 10,
+              "v6_peers": 0
+            },
+            {
+              "asn": 62167,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 10,
+              "v6_peers": 0
+            },
+            {
+              "asn": 6424,
+              "type": "uncertain",
+              "power": 2,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 835,
+              "type": "uncertain",
+              "power": 42,
+              "v4_peers": 292,
+              "v6_peers": 12
+            },
+            {
+              "asn": 852,
+              "type": "uncertain",
+              "power": 33,
+              "v4_peers": 251,
+              "v6_peers": 20
+            }
+          ]
+        }
+      },
+      "peering": {
+        "data": [
+          {
+            "id": 2081,
+            "asn": 11260,
+            "name": "Eastlink",
+            "updated": "2026-02-20T15:54:50Z",
+            "netixlan_updated": "2026-11-05T00:46:20Z",
+            "netfac_updated": "2023-06-07T16:43:26Z",
+            "netfac_set": [
+              {
+                "fac_id": 1,
+                "name": "Equinix DC1-DC15,DC21-DC22 - Ashburn",
+                "city": "Ashburn",
+                "country": "US",
+                "updated": "2016-10-14T13:40:59Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 7,
+                "name": "Equinix CH1/CH2/CH4 - Chicago",
+                "city": "Chicago",
+                "country": "US",
+                "updated": "2016-10-14T13:41:35Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 12,
+                "name": "Equinix TR1 - Toronto",
+                "city": "Toronto",
+                "country": "CA",
+                "updated": "2016-03-14T21:10:19Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 36,
+                "name": "Equinix NY2/NY4/NY5/NY6 - New York, Secaucus",
+                "city": "Secaucus",
+                "country": "US",
+                "updated": "2020-08-21T18:49:07Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 38,
+                "name": "Equinix NY9 - New York, 111 8th Avenue",
+                "city": "New York",
+                "country": "US",
+                "updated": "2016-03-11T07:22:25Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 45,
+                "name": "Equinix LD8 - London, Docklands",
+                "city": "London",
+                "country": "GB",
+                "updated": "2022-10-07T17:26:26Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 46,
+                "name": "Digital Realty London LON1-3",
+                "city": "London",
+                "country": "GB",
+                "updated": "2022-10-07T17:26:05Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 71,
+                "name": "Digital Realty Seattle SEA10",
+                "city": "Seattle",
+                "country": "US",
+                "updated": "2022-05-18T05:57:11Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 219,
+                "name": "Markley Group One Summer Street Boston",
+                "city": "Boston",
+                "country": "US",
+                "updated": "2016-10-14T13:40:33Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 347,
+                "name": "Level(3) Toronto",
+                "city": "Toronto",
+                "country": "CA",
+                "updated": "2016-10-14T14:52:49Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 350,
+                "name": "165 Halsey Meet-Me Room",
+                "city": "Newark",
+                "country": "US",
+                "updated": "2022-10-07T17:28:31Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 775,
+                "name": "Cologix TOR1",
+                "city": "Toronto",
+                "country": "CA",
+                "updated": "2021-06-11T12:42:01Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1365,
+                "name": "Datahive",
+                "city": "Calgary",
+                "country": "CA",
+                "updated": "2022-05-18T05:56:24Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1642,
+                "name": "EXA Edge DC Halifax Landingstation",
+                "city": "Halifax",
+                "country": "CA",
+                "updated": "2016-10-14T14:55:57Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1881,
+                "name": "Cologix VAN2",
+                "city": "Vancouver",
+                "country": "CA",
+                "updated": "2023-05-11T13:46:03Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1944,
+                "name": "Cologix MTL3",
+                "city": "Montreal",
+                "country": "CA",
+                "updated": "2018-06-13T10:33:58Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 2374,
+                "name": "Cologix TOR2",
+                "city": "Toronto",
+                "country": "CA",
+                "updated": "2023-06-07T16:43:27Z",
+                "status": "ok"
+              }
+            ],
+            "netixlan_set": [
+              {
+                "ix_id": 24,
+                "ixlan_id": 24,
+                "name": "TorIX",
+                "ipaddr4": "206.108.34.118",
+                "ipaddr6": "2001:504:1a::34:118",
+                "updated": "2026-03-25T00:03:43Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 13,
+                "ixlan_id": 13,
+                "name": "SIX Seattle: MTU 1500",
+                "ipaddr4": "206.81.80.236",
+                "ipaddr6": "2001:504:16::2bfc",
+                "updated": "2022-06-02T08:13:04Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 2,
+                "ixlan_id": 2,
+                "name": "Equinix Chicago",
+                "ipaddr4": "208.115.136.215",
+                "ipaddr6": "2001:504:0:4:0:2:3184:1",
+                "updated": "2025-03-08T02:57:37Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 24,
+                "ixlan_id": 24,
+                "name": "TorIX",
+                "ipaddr4": "206.108.34.20",
+                "ipaddr6": "2001:504:1a::34:20",
+                "updated": "2026-03-25T00:03:42Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 565,
+                "ixlan_id": 565,
+                "name": "Boston Internet Exchange",
+                "ipaddr4": "206.108.236.64",
+                "ipaddr6": "2001:504:24:1::2bfc:1",
+                "updated": "2025-06-20T12:54:42Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 804,
+                "ixlan_id": 804,
+                "name": "DE-CIX New York: DE-CIX New York Peering LAN",
+                "ipaddr4": "206.82.104.184",
+                "ipaddr6": "2001:504:36::2bfc:0:1",
+                "updated": "2019-01-29T10:31:36Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 804,
+                "ixlan_id": 804,
+                "name": "DE-CIX New York: DE-CIX New York Peering LAN",
+                "ipaddr4": "206.82.104.187",
+                "ipaddr6": "2001:504:36::5a90:0:1",
+                "updated": "2026-02-20T15:55:44Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 14,
+                "ixlan_id": 14,
+                "name": "NYIIX New York",
+                "ipaddr4": "198.32.160.237",
+                "ipaddr6": "2001:504:1::a501:1260:1",
+                "updated": "2022-09-16T16:30:40Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 906,
+                "ixlan_id": 906,
+                "name": "CANIX Halifax",
+                "ipaddr4": "206.130.15.22",
+                "ipaddr6": "2001:504:37:10::220",
+                "updated": "2026-11-05T00:46:21Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 13,
+                "ixlan_id": 13,
+                "name": "SIX Seattle: MTU 1500",
+                "ipaddr4": "206.81.81.218",
+                "ipaddr6": "2001:504:16::474:0:2bfc",
+                "updated": "2022-06-02T08:13:04Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 355,
+                "ixlan_id": 355,
+                "name": "CANIX Montreal",
+                "ipaddr4": "198.179.18.59",
+                "ipaddr6": "2001:504:2d::18:59",
+                "updated": "2026-03-25T01:04:32Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 14,
+                "ixlan_id": 14,
+                "name": "NYIIX New York",
+                "ipaddr4": "198.32.160.238",
+                "ipaddr6": "2001:504:1::a501:1260:2",
+                "updated": "2022-09-16T16:40:44Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 639,
+                "ixlan_id": 639,
+                "name": "YYCIX",
+                "ipaddr4": "206.126.225.46",
+                "ipaddr6": "2001:504:2f::3:2233:1",
+                "updated": "2025-03-08T02:57:37Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 863,
+                "ixlan_id": 863,
+                "name": "VANIX",
+                "ipaddr4": "206.41.104.23",
+                "ipaddr6": "2001:504:39::23",
+                "updated": "2023-05-11T13:02:30Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 18,
+                "ixlan_id": 18,
+                "name": "LINX LON1: Main",
+                "ipaddr4": "195.66.231.31",
+                "ipaddr6": "2001:7f8:4::2bfc:1",
+                "updated": "2023-12-14T22:20:54Z",
+                "status": "ok",
+                "operational": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "855": {
+      "asn": 855,
+      "checked_at": "2026-11-25T06:39:02Z",
+      "ripe": {
+        "status": "ok",
+        "data": {
+          "resource": "855",
+          "query_starttime": "2026-11-24T00:00:00",
+          "query_endtime": "2026-11-24T00:00:00",
+          "neighbours": [
+            {
+              "asn": 1299,
+              "type": "left",
+              "power": 2342,
+              "v4_peers": 112365,
+              "v6_peers": 438
+            },
+            {
+              "asn": 286,
+              "type": "left",
+              "power": 28,
+              "v4_peers": 921,
+              "v6_peers": 9
+            },
+            {
+              "asn": 3257,
+              "type": "left",
+              "power": 1135,
+              "v4_peers": 46263,
+              "v6_peers": 245
+            },
+            {
+              "asn": 3356,
+              "type": "left",
+              "power": 942,
+              "v4_peers": 87233,
+              "v6_peers": 230
+            },
+            {
+              "asn": 577,
+              "type": "left",
+              "power": 1694,
+              "v4_peers": 30223,
+              "v6_peers": 1968
+            },
+            {
+              "asn": 6327,
+              "type": "left",
+              "power": 8,
+              "v4_peers": 19,
+              "v6_peers": 0
+            },
+            {
+              "asn": 6939,
+              "type": "left",
+              "power": 183,
+              "v4_peers": 16084,
+              "v6_peers": 0
+            },
+            {
+              "asn": 12211,
+              "type": "right",
+              "power": 213,
+              "v4_peers": 256,
+              "v6_peers": 0
+            },
+            {
+              "asn": 17170,
+              "type": "right",
+              "power": 8,
+              "v4_peers": 9,
+              "v6_peers": 0
+            },
+            {
+              "asn": 18814,
+              "type": "right",
+              "power": 80,
+              "v4_peers": 181,
+              "v6_peers": 0
+            },
+            {
+              "asn": 19772,
+              "type": "right",
+              "power": 19,
+              "v4_peers": 42,
+              "v6_peers": 0
+            },
+            {
+              "asn": 21659,
+              "type": "right",
+              "power": 76,
+              "v4_peers": 145,
+              "v6_peers": 10
+            },
+            {
+              "asn": 21853,
+              "type": "right",
+              "power": 67,
+              "v4_peers": 71,
+              "v6_peers": 27
+            },
+            {
+              "asn": 22372,
+              "type": "right",
+              "power": 199,
+              "v4_peers": 240,
+              "v6_peers": 0
+            },
+            {
+              "asn": 22636,
+              "type": "right",
+              "power": 196,
+              "v4_peers": 723,
+              "v6_peers": 0
+            },
+            {
+              "asn": 26523,
+              "type": "right",
+              "power": 2,
+              "v4_peers": 0,
+              "v6_peers": 8
+            },
+            {
+              "asn": 29907,
+              "type": "right",
+              "power": 51,
+              "v4_peers": 279,
+              "v6_peers": 0
+            },
+            {
+              "asn": 30657,
+              "type": "right",
+              "power": 52,
+              "v4_peers": 66,
+              "v6_peers": 0
+            },
+            {
+              "asn": 32441,
+              "type": "right",
+              "power": 258,
+              "v4_peers": 326,
+              "v6_peers": 0
+            },
+            {
+              "asn": 32747,
+              "type": "right",
+              "power": 258,
+              "v4_peers": 654,
+              "v6_peers": 0
+            },
+            {
+              "asn": 33056,
+              "type": "right",
+              "power": 55,
+              "v4_peers": 64,
+              "v6_peers": 0
+            },
+            {
+              "asn": 36004,
+              "type": "right",
+              "power": 254,
+              "v4_peers": 1962,
+              "v6_peers": 0
+            },
+            {
+              "asn": 394015,
+              "type": "right",
+              "power": 438,
+              "v4_peers": 329,
+              "v6_peers": 354
+            },
+            {
+              "asn": 395431,
+              "type": "right",
+              "power": 258,
+              "v4_peers": 327,
+              "v6_peers": 0
+            },
+            {
+              "asn": 3958,
+              "type": "right",
+              "power": 261,
+              "v4_peers": 650,
+              "v6_peers": 0
+            },
+            {
+              "asn": 398006,
+              "type": "right",
+              "power": 512,
+              "v4_peers": 653,
+              "v6_peers": 0
+            },
+            {
+              "asn": 40439,
+              "type": "right",
+              "power": 172,
+              "v4_peers": 205,
+              "v6_peers": 0
+            },
+            {
+              "asn": 40575,
+              "type": "right",
+              "power": 353,
+              "v4_peers": 2291,
+              "v6_peers": 0
+            },
+            {
+              "asn": 53367,
+              "type": "right",
+              "power": 199,
+              "v4_peers": 240,
+              "v6_peers": 0
+            },
+            {
+              "asn": 53868,
+              "type": "right",
+              "power": 99,
+              "v4_peers": 115,
+              "v6_peers": 0
+            },
+            {
+              "asn": 603,
+              "type": "right",
+              "power": 438,
+              "v4_peers": 326,
+              "v6_peers": 351
+            },
+            {
+              "asn": 611,
+              "type": "right",
+              "power": 436,
+              "v4_peers": 9938,
+              "v6_peers": 0
+            },
+            {
+              "asn": 62772,
+              "type": "right",
+              "power": 102,
+              "v4_peers": 116,
+              "v6_peers": 0
+            },
+            {
+              "asn": 63334,
+              "type": "right",
+              "power": 26,
+              "v4_peers": 29,
+              "v6_peers": 15
+            },
+            {
+              "asn": 6579,
+              "type": "right",
+              "power": 52,
+              "v4_peers": 355,
+              "v6_peers": 0
+            },
+            {
+              "asn": 8111,
+              "type": "right",
+              "power": 272,
+              "v4_peers": 622,
+              "v6_peers": 22
+            }
+          ]
+        }
+      },
+      "peering": {
+        "data": [
+          {
+            "id": 1971,
+            "asn": 855,
+            "name": "Bell Aliant Inc.",
+            "updated": "2022-07-27T05:33:17Z",
+            "netixlan_updated": "2021-09-16T00:15:41Z",
+            "netfac_updated": "2018-06-13T10:47:30Z",
+            "netfac_set": [
+              {
+                "fac_id": 7,
+                "name": "Equinix CH1/CH2/CH4 - Chicago",
+                "city": "Chicago",
+                "country": "US",
+                "updated": "2016-03-14T20:24:10Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 38,
+                "name": "Equinix NY9 - New York, 111 8th Avenue",
+                "city": "New York",
+                "country": "US",
+                "updated": "2016-03-14T20:34:48Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 392,
+                "name": "Telehouse Toronto (151 Front St West)",
+                "city": "Toronto",
+                "country": "CA",
+                "updated": "2016-03-14T21:57:37Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1967,
+                "name": "Cologix MTL1",
+                "city": "Montreal",
+                "country": "CA",
+                "updated": "2018-06-13T10:47:30Z",
+                "status": "ok"
+              }
+            ],
+            "netixlan_set": [
+              {
+                "ix_id": 2,
+                "ixlan_id": 2,
+                "name": "Equinix Chicago",
+                "ipaddr4": "208.115.136.89",
+                "ipaddr6": "2001:504:0:4::855:1",
+                "updated": "2020-03-06T19:23:01Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 12,
+                "ixlan_id": 12,
+                "name": "Equinix New York",
+                "ipaddr4": "198.32.118.165",
+                "ipaddr6": "2001:504:f::855:1",
+                "updated": "2016-03-14T20:55:18Z",
+                "status": "ok",
+                "operational": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "5645": {
+      "asn": 5645,
+      "checked_at": "2026-11-25T06:39:02Z",
+      "ripe": {
+        "status": "ok",
+        "data": {
+          "resource": "5645",
+          "query_starttime": "2026-11-24T00:00:00",
+          "query_endtime": "2026-11-24T00:00:00",
+          "neighbours": [
+            {
+              "asn": 1299,
+              "type": "left",
+              "power": 210,
+              "v4_peers": 3803,
+              "v6_peers": 64
+            },
+            {
+              "asn": 20473,
+              "type": "left",
+              "power": 4,
+              "v4_peers": 0,
+              "v6_peers": 4
+            },
+            {
+              "asn": 286,
+              "type": "left",
+              "power": 6,
+              "v4_peers": 93,
+              "v6_peers": 3
+            },
+            {
+              "asn": 3257,
+              "type": "left",
+              "power": 604,
+              "v4_peers": 7701,
+              "v6_peers": 201
+            },
+            {
+              "asn": 3303,
+              "type": "left",
+              "power": 24,
+              "v4_peers": 444,
+              "v6_peers": 9
+            },
+            {
+              "asn": 394256,
+              "type": "left",
+              "power": 6,
+              "v4_peers": 94,
+              "v6_peers": 4
+            },
+            {
+              "asn": 577,
+              "type": "left",
+              "power": 1,
+              "v4_peers": 21,
+              "v6_peers": 0
+            },
+            {
+              "asn": 6461,
+              "type": "left",
+              "power": 859,
+              "v4_peers": 15332,
+              "v6_peers": 674
+            },
+            {
+              "asn": 6939,
+              "type": "left",
+              "power": 208,
+              "v4_peers": 1738,
+              "v6_peers": 390
+            },
+            {
+              "asn": 8220,
+              "type": "left",
+              "power": 9,
+              "v4_peers": 93,
+              "v6_peers": 0
+            },
+            {
+              "asn": 11655,
+              "type": "right",
+              "power": 155,
+              "v4_peers": 422,
+              "v6_peers": 34
+            },
+            {
+              "asn": 23261,
+              "type": "right",
+              "power": 262,
+              "v4_peers": 330,
+              "v6_peers": 0
+            },
+            {
+              "asn": 32881,
+              "type": "right",
+              "power": 252,
+              "v4_peers": 990,
+              "v6_peers": 0
+            },
+            {
+              "asn": 396515,
+              "type": "right",
+              "power": 9,
+              "v4_peers": 12,
+              "v6_peers": 0
+            },
+            {
+              "asn": 399580,
+              "type": "right",
+              "power": 31,
+              "v4_peers": 43,
+              "v6_peers": 36
+            },
+            {
+              "asn": 40568,
+              "type": "right",
+              "power": 369,
+              "v4_peers": 329,
+              "v6_peers": 329
+            },
+            {
+              "asn": 53414,
+              "type": "right",
+              "power": 270,
+              "v4_peers": 990,
+              "v6_peers": 0
+            },
+            {
+              "asn": 1403,
+              "type": "uncertain",
+              "power": 7,
+              "v4_peers": 70,
+              "v6_peers": 6
+            },
+            {
+              "asn": 1828,
+              "type": "uncertain",
+              "power": 6,
+              "v4_peers": 94,
+              "v6_peers": 4
+            },
+            {
+              "asn": 22652,
+              "type": "uncertain",
+              "power": 7,
+              "v4_peers": 94,
+              "v6_peers": 6
+            },
+            {
+              "asn": 24482,
+              "type": "uncertain",
+              "power": 7,
+              "v4_peers": 279,
+              "v6_peers": 14
+            },
+            {
+              "asn": 35280,
+              "type": "uncertain",
+              "power": 6,
+              "v4_peers": 90,
+              "v6_peers": 0
+            },
+            {
+              "asn": 36236,
+              "type": "uncertain",
+              "power": 6,
+              "v4_peers": 90,
+              "v6_peers": 4
+            },
+            {
+              "asn": 49544,
+              "type": "uncertain",
+              "power": 6,
+              "v4_peers": 188,
+              "v6_peers": 8
+            },
+            {
+              "asn": 835,
+              "type": "uncertain",
+              "power": 7,
+              "v4_peers": 72,
+              "v6_peers": 4
+            }
+          ]
+        }
+      },
+      "peering": {
+        "data": [
+          {
+            "id": 1396,
+            "asn": 5645,
+            "name": "TekSavvy Solutions Inc.",
+            "updated": "2026-11-02T04:55:19Z",
+            "netixlan_updated": "2026-09-21T19:25:31Z",
+            "netfac_updated": "2024-12-04T23:31:01Z",
+            "netfac_set": [
+              {
+                "fac_id": 392,
+                "name": "Telehouse Toronto (151 Front St West)",
+                "city": "Toronto",
+                "country": "CA",
+                "updated": "2016-03-14T21:04:01Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 775,
+                "name": "Cologix TOR1",
+                "city": "Toronto",
+                "country": "CA",
+                "updated": "2024-12-04T23:31:02Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 886,
+                "name": "Internetworking Atlantic",
+                "city": "Halifax",
+                "country": "CA",
+                "updated": "2018-01-12T15:32:20Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1365,
+                "name": "Datahive",
+                "city": "Calgary",
+                "country": "CA",
+                "updated": "2018-01-12T15:31:36Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1558,
+                "name": "Global Server Center",
+                "city": "Winnipeg",
+                "country": "CA",
+                "updated": "2017-12-11T14:55:29Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1881,
+                "name": "Cologix VAN2",
+                "city": "Vancouver",
+                "country": "CA",
+                "updated": "2018-05-18T13:29:33Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1944,
+                "name": "Cologix MTL3",
+                "city": "Montreal",
+                "country": "CA",
+                "updated": "2016-03-11T07:21:46Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 1945,
+                "name": "Cologix MTL7",
+                "city": "Montreal",
+                "country": "CA",
+                "updated": "2016-03-14T20:35:13Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 2222,
+                "name": "Telehouse Toronto (250 Front St West)",
+                "city": "Toronto",
+                "country": "CA",
+                "updated": "2018-01-18T20:02:50Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 2374,
+                "name": "Cologix TOR2",
+                "city": "Toronto",
+                "country": "CA",
+                "updated": "2021-03-16T14:54:13Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 3785,
+                "name": "Fibre Centre",
+                "city": "Moncton",
+                "country": "CA",
+                "updated": "2019-07-31T12:39:03Z",
+                "status": "ok"
+              },
+              {
+                "fac_id": 4238,
+                "name": "Innovation Place - 121RD",
+                "city": "Saskatoon",
+                "country": "CA",
+                "updated": "2017-12-21T15:26:12Z",
+                "status": "ok"
+              }
+            ],
+            "netixlan_set": [
+              {
+                "ix_id": 24,
+                "ixlan_id": 24,
+                "name": "TorIX",
+                "ipaddr4": "206.108.34.67",
+                "ipaddr6": "2001:504:1a::34:67",
+                "updated": "2026-05-15T00:03:32Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 703,
+                "ixlan_id": 703,
+                "name": "MBIX: Public Peering",
+                "ipaddr4": "206.72.208.29",
+                "ipaddr6": "2001:504:26::5645:1",
+                "updated": "2025-08-16T01:14:22Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 1829,
+                "ixlan_id": 1829,
+                "name": "YXEIX: YXEIX",
+                "ipaddr4": "206.71.11.18",
+                "ipaddr6": "2001:504:69:8000::700",
+                "updated": "2024-05-18T00:26:31Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 639,
+                "ixlan_id": 639,
+                "name": "YYCIX",
+                "ipaddr4": "206.126.225.39",
+                "ipaddr6": "2001:504:2f::5645:1",
+                "updated": "2025-01-11T02:14:20Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 863,
+                "ixlan_id": 863,
+                "name": "VANIX",
+                "ipaddr4": "206.41.104.10",
+                "ipaddr6": "2001:504:39::10",
+                "updated": "2024-05-18T00:26:31Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 13,
+                "ixlan_id": 13,
+                "name": "SIX Seattle: MTU 1500",
+                "ipaddr4": "206.81.81.47",
+                "ipaddr6": "2001:504:16::160d",
+                "updated": "2018-12-27T16:50:41Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 355,
+                "ixlan_id": 355,
+                "name": "CANIX Montreal",
+                "ipaddr4": "198.179.18.35",
+                "ipaddr6": "2001:504:2d::18:35",
+                "updated": "2026-03-25T01:04:32Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 906,
+                "ixlan_id": 906,
+                "name": "CANIX Halifax",
+                "ipaddr4": "206.130.15.23",
+                "ipaddr6": "2001:504:37:10::230",
+                "updated": "2026-09-21T19:24:45Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 2070,
+                "ixlan_id": 2070,
+                "name": "CANIX Moncton: MonctonIX",
+                "ipaddr4": "206.71.137.8",
+                "ipaddr6": "2001:504:37:30::80",
+                "updated": "2026-09-21T19:25:31Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 2,
+                "ixlan_id": 2,
+                "name": "Equinix Chicago",
+                "ipaddr4": "208.115.136.65",
+                "ipaddr6": "2001:504:0:4::5645:1",
+                "updated": "2019-10-26T13:34:34Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 24,
+                "ixlan_id": 24,
+                "name": "TorIX",
+                "ipaddr4": "206.108.35.223",
+                "ipaddr6": "2001:504:1a::35:223",
+                "updated": "2026-05-15T00:03:32Z",
+                "status": "ok",
+                "operational": true
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "803": {
+      "asn": 803,
+      "checked_at": "2026-11-25T06:39:02Z",
+      "ripe": {
+        "status": "ok",
+        "data": {
+          "resource": "803",
+          "query_starttime": "2026-11-24T00:00:00",
+          "query_endtime": "2026-11-24T00:00:00",
+          "neighbours": [
+            {
+              "asn": 137409,
+              "type": "left",
+              "power": 36,
+              "v4_peers": 323,
+              "v6_peers": 12
+            },
+            {
+              "asn": 174,
+              "type": "left",
+              "power": 1341,
+              "v4_peers": 12180,
+              "v6_peers": 354
+            },
+            {
+              "asn": 19523,
+              "type": "left",
+              "power": 407,
+              "v4_peers": 721,
+              "v6_peers": 0
+            },
+            {
+              "asn": 20473,
+              "type": "left",
+              "power": 7,
+              "v4_peers": 0,
+              "v6_peers": 19
+            },
+            {
+              "asn": 32621,
+              "type": "left",
+              "power": 11,
+              "v4_peers": 98,
+              "v6_peers": 1
+            },
+            {
+              "asn": 3303,
+              "type": "left",
+              "power": 64,
+              "v4_peers": 538,
+              "v6_peers": 11
+            },
+            {
+              "asn": 394256,
+              "type": "left",
+              "power": 18,
+              "v4_peers": 141,
+              "v6_peers": 6
+            },
+            {
+              "asn": 399844,
+              "type": "left",
+              "power": 408,
+              "v4_peers": 987,
+              "v6_peers": 354
+            },
+            {
+              "asn": 52025,
+              "type": "left",
+              "power": 4,
+              "v4_peers": 5,
+              "v6_peers": 0
+            },
+            {
+              "asn": 577,
+              "type": "left",
+              "power": 1345,
+              "v4_peers": 6081,
+              "v6_peers": 1143
+            },
+            {
+              "asn": 60068,
+              "type": "left",
+              "power": 44,
+              "v4_peers": 470,
+              "v6_peers": 39
+            },
+            {
+              "asn": 6461,
+              "type": "left",
+              "power": 2007,
+              "v4_peers": 21625,
+              "v6_peers": 1276
+            },
+            {
+              "asn": 6939,
+              "type": "left",
+              "power": 214,
+              "v4_peers": 1810,
+              "v6_peers": 91
+            },
+            {
+              "asn": 7575,
+              "type": "left",
+              "power": 11,
+              "v4_peers": 99,
+              "v6_peers": 0
+            },
+            {
+              "asn": 8220,
+              "type": "left",
+              "power": 14,
+              "v4_peers": 103,
+              "v6_peers": 0
+            },
+            {
+              "asn": 9002,
+              "type": "left",
+              "power": 36,
+              "v4_peers": 377,
+              "v6_peers": 7
+            },
+            {
+              "asn": 1043,
+              "type": "right",
+              "power": 78,
+              "v4_peers": 195,
+              "v6_peers": 0
+            },
+            {
+              "asn": 1085,
+              "type": "right",
+              "power": 98,
+              "v4_peers": 112,
+              "v6_peers": 107
+            },
+            {
+              "asn": 10980,
+              "type": "right",
+              "power": 29,
+              "v4_peers": 551,
+              "v6_peers": 0
+            },
+            {
+              "asn": 11568,
+              "type": "right",
+              "power": 309,
+              "v4_peers": 993,
+              "v6_peers": 0
+            },
+            {
+              "asn": 14336,
+              "type": "right",
+              "power": 262,
+              "v4_peers": 3310,
+              "v6_peers": 0
+            },
+            {
+              "asn": 17300,
+              "type": "right",
+              "power": 461,
+              "v4_peers": 637,
+              "v6_peers": 0
+            },
+            {
+              "asn": 18968,
+              "type": "right",
+              "power": 72,
+              "v4_peers": 332,
+              "v6_peers": 0
+            },
+            {
+              "asn": 22950,
+              "type": "right",
+              "power": 55,
+              "v4_peers": 382,
+              "v6_peers": 28
+            },
+            {
+              "asn": 26206,
+              "type": "right",
+              "power": 19,
+              "v4_peers": 56,
+              "v6_peers": 0
+            },
+            {
+              "asn": 27628,
+              "type": "right",
+              "power": 58,
+              "v4_peers": 669,
+              "v6_peers": 43
+            },
+            {
+              "asn": 30324,
+              "type": "right",
+              "power": 348,
+              "v4_peers": 1035,
+              "v6_peers": 0
+            },
+            {
+              "asn": 30580,
+              "type": "right",
+              "power": 199,
+              "v4_peers": 443,
+              "v6_peers": 0
+            },
+            {
+              "asn": 36479,
+              "type": "right",
+              "power": 290,
+              "v4_peers": 394,
+              "v6_peers": 0
+            },
+            {
+              "asn": 393598,
+              "type": "right",
+              "power": 22,
+              "v4_peers": 83,
+              "v6_peers": 0
+            },
+            {
+              "asn": 393607,
+              "type": "right",
+              "power": 307,
+              "v4_peers": 401,
+              "v6_peers": 356
+            },
+            {
+              "asn": 393891,
+              "type": "right",
+              "power": 35,
+              "v4_peers": 187,
+              "v6_peers": 444
+            },
+            {
+              "asn": 395270,
+              "type": "right",
+              "power": 156,
+              "v4_peers": 215,
+              "v6_peers": 0
+            },
+            {
+              "asn": 397320,
+              "type": "right",
+              "power": 261,
+              "v4_peers": 658,
+              "v6_peers": 0
+            },
+            {
+              "asn": 397335,
+              "type": "right",
+              "power": 408,
+              "v4_peers": 987,
+              "v6_peers": 354
+            },
+            {
+              "asn": 397894,
+              "type": "right",
+              "power": 469,
+              "v4_peers": 249,
+              "v6_peers": 649
+            },
+            {
+              "asn": 399844,
+              "type": "right",
+              "power": 915,
+              "v4_peers": 19363,
+              "v6_peers": 354
+            },
+            {
+              "asn": 400085,
+              "type": "right",
+              "power": 48,
+              "v4_peers": 70,
+              "v6_peers": 0
+            },
+            {
+              "asn": 400929,
+              "type": "right",
+              "power": 412,
+              "v4_peers": 662,
+              "v6_peers": 355
+            },
+            {
+              "asn": 40814,
+              "type": "right",
+              "power": 79,
+              "v4_peers": 226,
+              "v6_peers": 0
+            },
+            {
+              "asn": 46612,
+              "type": "right",
+              "power": 291,
+              "v4_peers": 800,
+              "v6_peers": 0
+            },
+            {
+              "asn": 1403,
+              "type": "uncertain",
+              "power": 16,
+              "v4_peers": 134,
+              "v6_peers": 12
+            },
+            {
+              "asn": 18106,
+              "type": "uncertain",
+              "power": 14,
+              "v4_peers": 131,
+              "v6_peers": 0
+            },
+            {
+              "asn": 1828,
+              "type": "uncertain",
+              "power": 18,
+              "v4_peers": 141,
+              "v6_peers": 6
+            },
+            {
+              "asn": 22652,
+              "type": "uncertain",
+              "power": 22,
+              "v4_peers": 146,
+              "v6_peers": 7
+            },
+            {
+              "asn": 24482,
+              "type": "uncertain",
+              "power": 25,
+              "v4_peers": 437,
+              "v6_peers": 20
+            },
+            {
+              "asn": 34927,
+              "type": "uncertain",
+              "power": 21,
+              "v4_peers": 162,
+              "v6_peers": 1
+            },
+            {
+              "asn": 35280,
+              "type": "uncertain",
+              "power": 14,
+              "v4_peers": 134,
+              "v6_peers": 0
+            },
+            {
+              "asn": 36236,
+              "type": "uncertain",
+              "power": 20,
+              "v4_peers": 168,
+              "v6_peers": 6
+            },
+            {
+              "asn": 49544,
+              "type": "uncertain",
+              "power": 17,
+              "v4_peers": 270,
+              "v6_peers": 12
+            },
+            {
+              "asn": 835,
+              "type": "uncertain",
+              "power": 19,
+              "v4_peers": 145,
+              "v6_peers": 0
+            },
+            {
+              "asn": 852,
+              "type": "uncertain",
+              "power": 21,
+              "v4_peers": 137,
+              "v6_peers": 17
+            }
+          ]
+        }
+      },
+      "peering": {
+        "data": [
+          {
+            "id": 2178,
+            "asn": 803,
+            "name": "Saskatchewan Telecommunications",
+            "updated": "2026-11-02T04:55:09Z",
+            "netixlan_updated": "2026-03-26T16:20:06Z",
+            "netfac_updated": "2021-04-16T22:21:58Z",
+            "netfac_set": [],
+            "netixlan_set": [
+              {
+                "ix_id": 13,
+                "ixlan_id": 13,
+                "name": "SIX Seattle: MTU 1500",
+                "ipaddr4": "206.81.80.145",
+                "ipaddr6": "2001:504:16::323",
+                "updated": "2019-11-08T23:39:41Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 13,
+                "ixlan_id": 13,
+                "name": "SIX Seattle: MTU 1500",
+                "ipaddr4": "206.81.81.188",
+                "ipaddr6": "2001:504:16::444:0:323",
+                "updated": "2019-12-19T17:55:17Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 24,
+                "ixlan_id": 24,
+                "name": "TorIX",
+                "ipaddr4": "206.108.34.96",
+                "ipaddr6": "2001:504:1a::34:96",
+                "updated": "2026-03-25T23:33:11Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 863,
+                "ixlan_id": 863,
+                "name": "VANIX",
+                "ipaddr4": "206.41.104.25",
+                "ipaddr6": "2001:504:39::25",
+                "updated": "2023-01-17T14:26:20Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 446,
+                "ixlan_id": 446,
+                "name": "MICE: Shared Peering",
+                "ipaddr4": "206.108.255.166",
+                "ipaddr6": "2001:504:27::323:0:1",
+                "updated": "2026-03-26T16:20:05Z",
+                "status": "ok",
+                "operational": true
+              },
+              {
+                "ix_id": 2,
+                "ixlan_id": 2,
+                "name": "Equinix Chicago",
+                "ipaddr4": "208.115.136.148",
+                "ipaddr6": "2001:504:0:4::803:1",
+                "updated": "2021-04-16T22:30:08Z",
+                "status": "ok",
+                "operational": true
+              }
+            ]
+          }
+        ]
+      }
     }
   },
+  "providers": [
+    {
+      "name": "Bell Canada Backbone",
+      "aka": "",
+      "name_long": "",
+      "updated": "2026-11-02T04:55:09Z",
+      "id": 1550,
+      "asn": 577
+    },
+    {
+      "name": "Saskatchewan Telecommunications",
+      "aka": "SaskTel",
+      "name_long": "",
+      "updated": "2026-11-02T04:55:09Z",
+      "id": 2178,
+      "asn": 803
+    },
+    {
+      "name": "Rogers Cable",
+      "aka": "",
+      "name_long": "",
+      "updated": "2026-11-02T04:55:09Z",
+      "id": 307,
+      "asn": 812
+    },
+    {
+      "name": "TELUS Communications",
+      "aka": "TELUS Communications Inc.",
+      "name_long": "",
+      "updated": "2026-04-22T16:24:01Z",
+      "id": 76,
+      "asn": 852
+    },
+    {
+      "name": "Bell Aliant Inc.",
+      "aka": "Aliant",
+      "name_long": "",
+      "updated": "2022-07-27T05:33:17Z",
+      "id": 1971,
+      "asn": 855
+    },
+    {
+      "name": "GTT Communications (AS3257)",
+      "aka": "fka Tinet, Inteliquent, Tiscali International Network",
+      "name_long": "",
+      "updated": "2026-11-02T04:55:14Z",
+      "id": 14,
+      "asn": 3257
+    },
+    {
+      "name": "TekSavvy Solutions Inc.",
+      "aka": "TSI",
+      "name_long": "",
+      "updated": "2026-11-02T04:55:19Z",
+      "id": 1396,
+      "asn": 5645
+    },
+    {
+      "name": "Shaw Cablesystems",
+      "aka": "Rogers Communications",
+      "name_long": "",
+      "updated": "2026-11-02T04:55:20Z",
+      "id": 317,
+      "asn": 6327
+    },
+    {
+      "name": "Eastlink",
+      "aka": "Bragg Communications",
+      "name_long": "",
+      "updated": "2026-02-20T15:54:50Z",
+      "id": 2081,
+      "asn": 11260
+    },
+    {
+      "name": "Distributel Communications Limited",
+      "aka": "Thinktel, 3Web, IGS, Cyberus",
+      "name_long": "Distributel Communications Limited",
+      "updated": "2026-11-03T04:29:23Z",
+      "id": 1939,
+      "asn": 11814
+    },
+    {
+      "name": "Cloudflare",
+      "aka": "",
+      "name_long": "",
+      "updated": "2026-11-23T13:52:23Z",
+      "id": 4224,
+      "asn": 13335
+    },
+    {
+      "name": "Beanfield Technologies",
+      "aka": "Beanfield",
+      "name_long": "",
+      "updated": "2026-09-11T16:06:11Z",
+      "id": 176,
+      "asn": 21949
+    },
+    {
+      "name": "ORION",
+      "aka": "Ontario Research and Innovation Optical Network (ORION)",
+      "name_long": "",
+      "updated": "2026-03-25T14:32:25Z",
+      "id": 4027,
+      "asn": 26677
+    }
+  ],
   "config": {
     "default_pair": [
       852,

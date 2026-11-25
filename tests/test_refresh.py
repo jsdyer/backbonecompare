@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
-from refresh import ripe,peering,collect,valid_asn
+from refresh import ripe,peering,collect,valid_asn,provider_directory
 
 class RefreshTests(unittest.TestCase):
     def test_asn_bounds_and_boolean_rejection(self):
@@ -30,3 +30,9 @@ class RefreshTests(unittest.TestCase):
         self.assertEqual(len(result['networks']),2);self.assertEqual(waits,[3.1]);self.assertEqual(len(calls),4)
         def fail(*args,**kwargs):raise OSError('unavailable')
         with self.assertRaises(OSError):collect(config,fetcher=fail)
+
+    def test_provider_directory_bounds_identity_and_contact_filter(self):
+        safe=provider_directory({'data':[{'asn':11260,'id':2081,'name':'Eastlink','aka':'Bragg Communications','poc_set':[{'email':'private'}]}]},[11260])
+        self.assertEqual(safe[0]['aka'],'Bragg Communications');self.assertNotIn('private',json.dumps(safe))
+        with self.assertRaises(ValueError):provider_directory({'data':[{'asn':123,'id':1,'name':'Wrong'}]},[11260])
+        with self.assertRaises(ValueError):provider_directory({'data':[]},[11260])

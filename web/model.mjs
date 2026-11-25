@@ -42,3 +42,17 @@ export function readPair(value) {if(value?.format!=='backbonecompare-pair'||valu
 export function pair(networks,notes,label) {return {format:'backbonecompare-pair',version:1,saved_at:new Date().toISOString(),networks,notes,label};}
 export const csvValue = value => '"'+(/^[=+@\-\t\r]/.test(String(value))?"'":'')+String(value).replaceAll('"','""')+'"';
 export function evidenceCsv(networks,family='any',uncertain=false) {const lines=[['Kind','ASN','Identifier','Name','Position','IPv4 evidence','IPv6 evidence','Observed at','Checked at']];for(const net of networks){for(const row of observed(net,family,uncertain)?.values()||[])lines.push(['BGP neighbour',net.asn,row.id,row.name,row.types.join('/'),row.ipv4,row.ipv6,net.bgp.observed_at||'',net.bgp.checked_at]);for(const kind of ['exchanges','facilities'])for(const row of locations(net,kind,family)?.values()||[])lines.push([kind,net.asn,row.id,row.name,'',kind==='exchanges'?row.ipv4:'',kind==='exchanges'?row.ipv6:'',row.updated_at||'',net.directory.checked_at]);}return lines.map(row=>row.map(csvValue).join(',')).join('\r\n');}
+
+// Lightweight name directory; deliberately excludes contacts and evidence memberships.
+export function providers(body){
+  if(!body||!Array.isArray(body.data)||body.data.length>100)throw new Error('Invalid provider directory response.');
+  const seen=new Set();return body.data.map(row=>{
+    if(!row||typeof row.asn!=='number'||!Number.isInteger(row.id)||row.id<1||typeof row.name!=='string'||!row.name.trim())throw new Error('Invalid provider directory entry.');
+    const number=asn(row.asn);if(seen.has(number))throw new Error('Duplicate provider directory entry.');seen.add(number);
+    return {asn:number,id:row.id,name:bounded(row.name,500),aka:bounded(row.aka,500),name_long:bounded(row.name_long,500)};
+  });
+}
+export function matchingProviders(rows,term){
+  const query=String(term).trim().toLowerCase().replace(/^as(?=\d+$)/,'');
+  return rows.filter(row=>[row.asn,row.name,row.aka,row.name_long].join(' ').toLowerCase().includes(query)).sort((a,b)=>a.name.localeCompare(b.name));
+}
