@@ -78,4 +78,6 @@ python3 -m pip install -r tests/browser-requirements.txt
 CHROMIUM_PATH=/usr/bin/google-chrome python3 tests/browser_smoke.py
 ```
 
+The offline builder applies one deterministic content version to local scripts, module imports, CSS and the published capture fetch. A normal refresh therefore loads matching provider code and data instead of mixing a new page with cached modules. Captured JSON bytes and unversioned watchdog probe URLs remain unchanged.
+
 CI uses Ubuntu 24.04's installed Google Chrome. Browser tests exercise arbitrary ASNs outside the presets, safe source text, IPv6 filtering, saved dated pairs, JSON download, partial-source failure preservation and mobile layout. Build output `dist/` is ignored. Follow `AGENTS.md` and the hub's tool lifecycle for catalogue, sitemap, Worker and watchdog integration.

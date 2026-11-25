@@ -30,9 +30,36 @@ class BuildTests(unittest.TestCase):
         self.assertIn('&lt;img', page)
         self.assertNotIn('<img', page)
         self.assertNotIn('{{', page)
-        self.assertIn('href="./style.css"', page)
+        self.assertRegex(page, r'href="\./style\.css\?v=[a-f0-9]{16}"')
         self.assertFalse((self.root / "dist/private.txt").exists())
         self.assertTrue((self.root / "dist/.nojekyll").exists())
+
+
+    def test_asset_graph_version_tracks_provider_code_and_capture_changes(self):
+        import re
+        snapshot = (self.root / "web/data/networks.json").read_bytes()
+        status = (self.root / "web/data/status.json").read_bytes()
+        build(self.root)
+        page = (self.root / "dist/index.html").read_text()
+        version = re.search(r'app\.mjs\?v=([a-f0-9]{16})', page).group(1)
+        app = (self.root / "dist/app.mjs").read_text()
+        self.assertIn(f"'./model.mjs?v={version}'", app)
+        self.assertIn(f"'./data/networks.json?v={version}'", app)
+        self.assertIn(f'./style.css?v={version}', page)
+        self.assertEqual((self.root / "dist/data/networks.json").read_bytes(), snapshot)
+        self.assertEqual((self.root / "dist/data/status.json").read_bytes(), status)
+        build(self.root)
+        self.assertEqual((self.root / "dist/index.html").read_text(), page)
+        model = self.root / "web/model.mjs"
+        model.write_text(model.read_text() + "\n// Provider module changed\n")
+        build(self.root)
+        changed = (self.root / "dist/index.html").read_text()
+        changed_version = re.search(r'app\.mjs\?v=([a-f0-9]{16})', changed).group(1)
+        self.assertNotEqual(version, changed_version)
+        data = self.root / "web/data/networks.json"
+        data.write_bytes(snapshot + b"\n")
+        build(self.root)
+        self.assertNotIn(f"app.mjs?v={changed_version}", (self.root / "dist/index.html").read_text())
 
     def test_reporting_is_scoped_to_initialized_coolcode_tools(self):
         for owner, slug, enabled in [
