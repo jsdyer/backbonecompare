@@ -28,7 +28,7 @@ function renderProviders(){
   const rows=matchingProviders([...all.values()],term);$('provider-results').replaceChildren();
   $('provider-status').textContent=(term.toLowerCase()===providerQuery&&providerMessage?providerMessage+' ':'')+`${rows.length} matching network${rows.length===1?'':'s'}${rows.length>25?'; showing first 25':''}. `+(rows.length?'Choose a side, then Compare networks.':'Try the public search or enter a known ASN above.');
   for(const row of rows.slice(0,25)){
-    const item=node('article',undefined,'provider-result'),label=node('div');label.append(node('strong',row.name),node('small',`AS${row.asn}${row.aka?' · '+row.aka:''}${cache.has(row.asn)?' · published evidence available':' · live evidence lookup'}`));item.append(label);
+    const item=node('article',undefined,'provider-result'),label=node('div');label.append(node('strong',row.name),node('small',`AS${row.asn}${row.aka?' · '+row.aka:''}${baseline?.networks?.[String(row.asn)]?' · published evidence available':' · live evidence lookup'}`));item.append(label);
     for(const side of ['a','b']){const button=node('button','Use as '+side.toUpperCase(),'secondary');button.type='button';button.setAttribute('aria-label',`Use ${row.name} AS${row.asn} as ${side.toUpperCase()}`);button.onclick=()=>{$('asn-'+side).value=String(row.asn);status(`Selected ${row.name} as ${side.toUpperCase()}. Press Compare networks to load the pair.`);$('asn-'+side).focus();};item.append(button);}
     item.append(link('Directory ↗',`https://www.peeringdb.com/net/${row.id}`));$('provider-results').append(item);
   }
